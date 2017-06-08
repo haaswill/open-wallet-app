@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
-import { styles } from '../../config/styles';
+import { colors } from '../../config/styles';
+import styles from './styles';
 import Slides from '../../components/Slides';
 
 const slidesData = [
-  { text: 'Welcome to Open Wallet', color: styles.secondaryColor },
-  { text: 'A simple way to manage your finances', color: styles.secondaryColor },
-  { text: 'Start now!', color: styles.secondaryColor }
+  { text: 'Welcome to Open Wallet', color: colors.secondaryColor },
+  { text: 'A simple way to manage your finances', color: colors.secondaryColor },
+  { text: 'Start now!', color: colors.secondaryColor }
 ];
 
 class Splash extends Component {
@@ -33,7 +34,7 @@ class Splash extends Component {
         <Button
           title="Finish!"
           raised
-          color={styles.primaryColor}
+          color={colors.primaryColor}
           buttonStyle={styles.button}
           onPress={this.onSlidesComplete}
         />

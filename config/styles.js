@@ -1,5 +1,5 @@
 // Global Colors
-const styles = {
+const colors = {
   primaryColor: '#1693A5',
   secondaryColor: '#F2F2F2',
   errorColor: '#FF0000',
@@ -7,4 +7,4 @@ const styles = {
   warningColor: '#FF9900'
 };
 
-export { styles };
+export { colors };

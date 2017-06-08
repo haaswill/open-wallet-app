@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { styles } from '../../config/styles';
+import { colors } from '../../config/styles';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -12,11 +12,11 @@ export default StyleSheet.create({
   },
   text: {
     fontSize: 30,
-    color: styles.primaryColor,
+    color: colors.primaryColor,
     textAlign: 'center',
     marginBottom: 15
   },
   button: {
-    backgroundColor: styles.secondaryColor
+    backgroundColor: colors.secondaryColor
   }
 });
