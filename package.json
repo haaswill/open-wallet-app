@@ -1,13 +1,26 @@
 {
   "name": "open-wallet-app",
   "version": "0.0.0",
-  "description": "Hello Expo!",
-  "author": null,
+  "description": "iOS app to consume the Open Wallet API",
+  "author": "Willian Haas",
   "private": true,
   "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haaswill/open-wallet-app.git"
+  },
   "dependencies": {
     "expo": "17.0.0",
+    "prop-types": "^15.5.10",
     "react": "16.0.0-alpha.6",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-17.0.0.tar.gz"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-17.0.0.tar.gz",
+    "react-native-elements": "^0.12.2",
+    "react-navigation": "^1.0.0-beta.11",
+    "react-redux": "^5.0.5",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint-config-rallycoding": "^3.2.0"
   }
 }
