@@ -1,4 +1,3 @@
-import SignIn from './SignIn';
-import SignUp from './SignUp';
+import Authentication from './Authentication';
 
-export { SignIn, SignUp };
+export { Authentication };

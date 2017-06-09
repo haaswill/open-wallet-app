@@ -1,2 +1,2 @@
-export const SIGN_IN = 'SIGN_IN';
-export const SIGN_OUT = 'SIGN_OUT';
+export const FACEBOOK_LOGIN_SUCCESS = 'FACEBOOK_LOGIN_SUCCESS';
+export const FACEBOOK_LOGIN_FAIL = 'FACEBOOK_LOGIN_FAIL';

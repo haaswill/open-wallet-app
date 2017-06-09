@@ -8,12 +8,12 @@ import Slides from '../../components/Slides';
 const slidesData = [
   { text: 'Welcome to Open Wallet', color: colors.secondaryColor },
   { text: 'A simple way to manage your finances', color: colors.secondaryColor },
-  { text: 'Start now!', color: colors.secondaryColor }
+  { text: 'And it\'s free!', color: colors.secondaryColor }
 ];
 
 class Splash extends Component {
   onSlidesComplete = () => {
-    this.props.navigation.navigate('auth');
+    this.props.navigation.navigate('Authentication');
   }
 
   renderSlides() {
@@ -32,9 +32,11 @@ class Splash extends Component {
     if (index === slidesData.length - 1) {
       return (
         <Button
-          title="Finish!"
-          raised
-          color={colors.primaryColor}
+          large
+          iconRight
+          title="Go To Login!"
+          icon={{ name: 'arrow-forward' }}
+          color={colors.secondaryColor}
           buttonStyle={styles.button}
           onPress={this.onSlidesComplete}
         />

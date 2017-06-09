@@ -1,14 +1,12 @@
-import { StyleSheet, Dimensions } from 'react-native';
-import { colors } from '../../config/styles';
-
-const SCREEN_WIDTH = Dimensions.get('window').width;
+import { StyleSheet } from 'react-native';
+import { colors, sizes } from '../../config/styles';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: SCREEN_WIDTH
+    width: sizes.screenWidth
   },
   text: {
     fontSize: 30,
@@ -17,6 +15,6 @@ export default StyleSheet.create({
     marginBottom: 15
   },
   button: {
-    backgroundColor: colors.secondaryColor
+    backgroundColor: colors.primaryColor
   }
 });
