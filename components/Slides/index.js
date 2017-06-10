@@ -5,7 +5,7 @@ import styles from './styles';
 const Slides = ({ children }) => (
   <ScrollView
     horizontal
-    style={styles.outerContainer}
+    style={styles.container}
     pagingEnabled
   >
     {children}

@@ -3,10 +3,11 @@ import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import styles from './styles';
+import { facebookLogin } from '../../actions';
 
 class Authentication extends Component {
   onFacebookButtonPress = () => {
-
+    this.props.facebookLogin();
   }
 
   onGoogleButtonPress = () => {
@@ -40,4 +41,4 @@ class Authentication extends Component {
   }
 }
 
-export default connect(null, {})(Authentication);
+export default connect(null, { facebookLogin })(Authentication);
