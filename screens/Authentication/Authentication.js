@@ -3,15 +3,25 @@ import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import styles from './styles';
-import { facebookLogin } from '../../actions';
+import { facebookLoginAsync, googlekLoginAsync } from '../../actions';
 
 class Authentication extends Component {
+  componentWillReceiveProps(nextProps) {
+    this.onAuthenticationComplete(nextProps);
+  }
+
   onFacebookButtonPress = () => {
-    this.props.facebookLogin();
+    this.props.facebookLoginAsync();
   }
 
   onGoogleButtonPress = () => {
+    this.props.googlekLoginAsync();
+  }
 
+  onAuthenticationComplete(props) {
+    if (props.user) {
+      this.props.navigation.navigate('Home');
+    }
   }
 
   render() {
@@ -41,4 +51,6 @@ class Authentication extends Component {
   }
 }
 
-export default connect(null, { facebookLogin })(Authentication);
+const mapStateToProps = ({ authentication }) => ({ user: authentication.user });
+
+export default connect(mapStateToProps, { facebookLoginAsync, googlekLoginAsync })(Authentication);

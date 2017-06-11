@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import navigation from './navigation';
-import errors from './errors';
+import authentication from './authentication';
 
 export default combineReducers({
   navigation,
-  errors
+  authentication
 });

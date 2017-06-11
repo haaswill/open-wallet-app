@@ -1,11 +1,18 @@
 import {
-  FACEBOOK_LOGIN_SUCCESS
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
 } from '../actions/types';
 
-export default (state = {}, action) => {
+const initialState = {
+  user: null
+};
+
+export default (state = initialState, action) => {
   switch (action.type) {
-    case FACEBOOK_LOGIN_SUCCESS:
-      return { token: action.payload };
+    case LOGIN_SUCCESS:
+      return { user: action.payload };
+    case LOGIN_FAIL:
+      return initialState;
     default:
       return state;
   }
