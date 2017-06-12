@@ -10,28 +10,24 @@ import {
 
 export const facebookLoginAsync = () => async dispatch => {
   dispatch({ type: LOGIN_START });
-  let { token, provider } = await getTokenAsync();
-  if (!token || provider !== 'facebook') {
+  let token = await getTokenAsync();
+  if (!token) {
     token = await handleFacebookLoginAsync(dispatch);
-    provider = 'facebook';
   }
-  await saveTokenAsync(token, provider);
-  await handleUserAsync(token, provider, dispatch);
+  await handleUserAsync(token, 'google', dispatch);
 };
 
 export const googleLoginAsync = () => async dispatch => {
   dispatch({ type: LOGIN_START });
-  let { token, provider } = await getTokenAsync();
-  if (!token || provider !== 'google') {
+  let token = await getTokenAsync();
+  if (!token) {
     token = await handleGoogleLoginAsync(dispatch);
-    provider = 'google';
   }
-  await saveTokenAsync(token, provider);
-  await handleUserAsync(token, provider, dispatch);
+  await handleUserAsync(token, 'facebook', dispatch);
 };
 
-export const loginUserAsync = (token, provider) => async dispatch => {
-  handleUserAsync(token, provider, dispatch);
+export const loginUserAsync = (token) => async dispatch => {
+  handleUserAsync(token, dispatch);
 };
 
 const handleFacebookLoginAsync = async dispatch => {
@@ -59,19 +55,18 @@ const handleGoogleLoginAsync = async dispatch => {
 const handleUserAsync = async (token, provider, dispatch) => {
   try {
     const { data } = await axios.post(`${settings.apiUrl}/user/${provider}`, { token });
-    dispatch({ type: LOGIN_SUCCESS, payload: { user: data, token } });
+    saveTokenAsync(data.token);
+    dispatch({ type: LOGIN_SUCCESS, payload: { user: data } });
   } catch (error) {
     dispatch({ type: LOGIN_FAIL });
   }
 };
 
-const saveTokenAsync = async (token, provider) => {
+const saveTokenAsync = async token => {
   await AsyncStorage.setItem('token', token);
-  await AsyncStorage.setItem('provider', provider);
 };
 
 const getTokenAsync = async () => {
   const token = await AsyncStorage.getItem('token');
-  const provider = await AsyncStorage.getItem('provider');
-  return { token, provider };
+  return token;
 };

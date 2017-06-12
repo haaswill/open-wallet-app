@@ -1,7 +1,6 @@
-import { AppLoading } from 'expo';
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { connect } from 'react-redux';
+import { View, Text, AsyncStorage } from 'react-native';
+import { AppLoading } from 'expo';
 import { Button } from 'react-native-elements';
 import { colors } from '../../config/styles';
 import styles from './styles';
@@ -16,8 +15,9 @@ const slidesData = [
 class Splash extends Component {
   state = { token: null }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.user) {
+  async componentWillMount() {
+    const token = await AsyncStorage.getItem('token');
+    if (token) {
       this.props.navigation.navigate('Home');
     } else {
       this.setState({ token: false });
@@ -68,6 +68,4 @@ class Splash extends Component {
   }
 }
 
-const mapStateToProps = ({ authentication: { user } }) => ({ user });
-
-export default connect(mapStateToProps)(Splash);
+export default Splash;
