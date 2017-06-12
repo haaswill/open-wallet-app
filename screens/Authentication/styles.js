@@ -11,7 +11,7 @@ export default StyleSheet.create({
   facebookButton: {
     backgroundColor: colors.facebookColor,
   },
-  googlePlusButton: {
+  googleButton: {
     backgroundColor: colors.googlePlusColor
   },
   text: {

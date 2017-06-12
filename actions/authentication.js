@@ -3,26 +3,31 @@ import { Facebook, Google } from 'expo';
 import axios from 'axios';
 import { settings } from '../config/settings';
 import {
+  LOGIN_START,
   LOGIN_SUCCESS,
   LOGIN_FAIL
 } from './types';
 
 export const facebookLoginAsync = () => async dispatch => {
-  const token = await AsyncStorage.getItem('token');
-  if (token) {
-    dispatch({ type: LOGIN_SUCCESS, payload: token });
-  } else {
-    handleFacebookLoginAsync(dispatch);
+  dispatch({ type: LOGIN_START });
+  const provider = 'facebook';
+  let token = await getTokenAsync(provider);
+  if (!token) {
+    token = await handleFacebookLoginAsync(dispatch);
   }
+  await saveTokenAsync(token);
+  await handleUserAsync(token, provider, dispatch);
 };
 
 export const googlekLoginAsync = () => async dispatch => {
-  const token = await AsyncStorage.getItem('token');
-  if (token) {
-    dispatch({ type: LOGIN_SUCCESS, payload: token });
-  } else {
-    handleGoogleLoginAsync(dispatch);
+  dispatch({ type: LOGIN_START });
+  const provider = 'google';
+  let token = await getTokenAsync(provider);
+  if (!token) {
+    token = await handleGoogleLoginAsync(dispatch);
   }
+  await saveTokenAsync(token);
+  await handleUserAsync(token, provider, dispatch);
 };
 
 const handleFacebookLoginAsync = async dispatch => {
@@ -32,9 +37,7 @@ const handleFacebookLoginAsync = async dispatch => {
   if (type === 'cancel') {
     return dispatch({ type: LOGIN_FAIL });
   }
-  await AsyncStorage.setItem('token', token);
-  const user = await getFacebookUserInfoAsync(token);
-  dispatch({ type: LOGIN_SUCCESS, payload: user });
+  return token;
 };
 
 const handleGoogleLoginAsync = async dispatch => {
@@ -46,17 +49,15 @@ const handleGoogleLoginAsync = async dispatch => {
   if (type !== 'success') {
     return dispatch({ type: LOGIN_FAIL });
   }
-  await AsyncStorage.setItem('token', accessToken);
-  const user = await getGoogleUserInfoAsync(accessToken);
-  dispatch({ type: LOGIN_SUCCESS, payload: user });
+  return accessToken;
 };
 
-const getFacebookUserInfoAsync = async token => {
-  const { data } = await axios.post(`${settings.apiUrl}/user/facebook`, { token });
-  return data;
+const handleUserAsync = async (token, provider, dispatch) => {
+  const { data } = await axios.post(`${settings.apiUrl}/user/${provider}`, { token });
+  dispatch({ type: LOGIN_SUCCESS, payload: { user: data, token } });
 };
 
-const getGoogleUserInfoAsync = async token => {
-  const { data } = await axios.post(`${settings.apiUrl}/user/google`, { token });
-  return data;
-};
+const saveTokenAsync =
+  async (token, provider) => await AsyncStorage.setItem(`token_${provider}`, token);
+
+const getTokenAsync = async provider => await AsyncStorage.getItem(`token_${provider}`);
