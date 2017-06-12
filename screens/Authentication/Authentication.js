@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import styles from './styles';
-import { facebookLoginAsync, googlekLoginAsync } from '../../actions';
+import { facebookLoginAsync, googleLoginAsync } from '../../actions';
 import Spinner from '../../components/Spinner';
 
 class Authentication extends Component {
@@ -16,7 +16,7 @@ class Authentication extends Component {
   }
 
   onGoogleButtonPress = () => {
-    this.props.googlekLoginAsync();
+    this.props.googleLoginAsync();
   }
 
   onAuthenticationComplete(props) {
@@ -68,4 +68,4 @@ class Authentication extends Component {
 
 const mapStateToProps = ({ authentication: { user, loading } }) => ({ user, loading });
 
-export default connect(mapStateToProps, { facebookLoginAsync, googlekLoginAsync })(Authentication);
+export default connect(mapStateToProps, { facebookLoginAsync, googleLoginAsync })(Authentication);

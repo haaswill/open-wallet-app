@@ -1,5 +1,7 @@
+import { AppLoading } from 'expo';
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import { colors } from '../../config/styles';
 import styles from './styles';
@@ -12,6 +14,16 @@ const slidesData = [
 ];
 
 class Splash extends Component {
+  state = { token: null }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user) {
+      this.props.navigation.navigate('Home');
+    } else {
+      this.setState({ token: false });
+    }
+  }
+
   onSlidesComplete = () => {
     this.props.navigation.navigate('Authentication');
   }
@@ -45,6 +57,9 @@ class Splash extends Component {
   }
 
   render() {
+    if (this.state.token === null) {
+      return <AppLoading />;
+    }
     return (
       <Slides>
         {this.renderSlides()}
@@ -53,4 +68,6 @@ class Splash extends Component {
   }
 }
 
-export default Splash;
+const mapStateToProps = ({ authentication: { user } }) => ({ user });
+
+export default connect(mapStateToProps)(Splash);

@@ -10,24 +10,28 @@ import {
 
 export const facebookLoginAsync = () => async dispatch => {
   dispatch({ type: LOGIN_START });
-  const provider = 'facebook';
-  let token = await getTokenAsync(provider);
-  if (!token) {
+  let { token, provider } = await getTokenAsync();
+  if (!token || provider !== 'facebook') {
     token = await handleFacebookLoginAsync(dispatch);
+    provider = 'facebook';
   }
-  await saveTokenAsync(token);
+  await saveTokenAsync(token, provider);
   await handleUserAsync(token, provider, dispatch);
 };
 
-export const googlekLoginAsync = () => async dispatch => {
+export const googleLoginAsync = () => async dispatch => {
   dispatch({ type: LOGIN_START });
-  const provider = 'google';
-  let token = await getTokenAsync(provider);
-  if (!token) {
+  let { token, provider } = await getTokenAsync();
+  if (!token || provider !== 'google') {
     token = await handleGoogleLoginAsync(dispatch);
+    provider = 'google';
   }
-  await saveTokenAsync(token);
+  await saveTokenAsync(token, provider);
   await handleUserAsync(token, provider, dispatch);
+};
+
+export const loginUserAsync = (token, provider) => async dispatch => {
+  handleUserAsync(token, provider, dispatch);
 };
 
 const handleFacebookLoginAsync = async dispatch => {
@@ -53,11 +57,21 @@ const handleGoogleLoginAsync = async dispatch => {
 };
 
 const handleUserAsync = async (token, provider, dispatch) => {
-  const { data } = await axios.post(`${settings.apiUrl}/user/${provider}`, { token });
-  dispatch({ type: LOGIN_SUCCESS, payload: { user: data, token } });
+  try {
+    const { data } = await axios.post(`${settings.apiUrl}/user/${provider}`, { token });
+    dispatch({ type: LOGIN_SUCCESS, payload: { user: data, token } });
+  } catch (error) {
+    dispatch({ type: LOGIN_FAIL });
+  }
 };
 
-const saveTokenAsync =
-  async (token, provider) => await AsyncStorage.setItem(`token_${provider}`, token);
+const saveTokenAsync = async (token, provider) => {
+  await AsyncStorage.setItem('token', token);
+  await AsyncStorage.setItem('provider', provider);
+};
 
-const getTokenAsync = async provider => await AsyncStorage.getItem(`token_${provider}`);
+const getTokenAsync = async () => {
+  const token = await AsyncStorage.getItem('token');
+  const provider = await AsyncStorage.getItem('provider');
+  return { token, provider };
+};
