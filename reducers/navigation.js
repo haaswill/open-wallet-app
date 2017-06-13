@@ -5,8 +5,6 @@ const initialState = AppNavigator.router.getStateForAction(
 );
 
 export default (state = initialState, action) => {
-  switch (action.type) {
-    default:
-      return AppNavigator.router.getStateForAction(action, state);
-  }
+  const nextState = AppNavigator.router.getStateForAction(action, state);
+  return nextState || state;
 };

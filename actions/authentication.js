@@ -10,20 +10,14 @@ import {
 
 export const facebookLoginAsync = () => async dispatch => {
   dispatch({ type: LOGIN_START });
-  let token = await getTokenAsync();
-  if (!token) {
-    token = await handleFacebookLoginAsync(dispatch);
-  }
-  await handleUserAsync(token, 'google', dispatch);
+  const token = await handleFacebookLoginAsync(dispatch);
+  await handleUserAsync(token, 'facebook', dispatch);
 };
 
 export const googleLoginAsync = () => async dispatch => {
   dispatch({ type: LOGIN_START });
-  let token = await getTokenAsync();
-  if (!token) {
-    token = await handleGoogleLoginAsync(dispatch);
-  }
-  await handleUserAsync(token, 'facebook', dispatch);
+  const token = await handleGoogleLoginAsync(dispatch);
+  await handleUserAsync(token, 'google', dispatch);
 };
 
 export const loginUserAsync = (token) => async dispatch => {
@@ -64,9 +58,4 @@ const handleUserAsync = async (token, provider, dispatch) => {
 
 const saveTokenAsync = async token => {
   await AsyncStorage.setItem('token', token);
-};
-
-const getTokenAsync = async () => {
-  const token = await AsyncStorage.getItem('token');
-  return token;
 };
