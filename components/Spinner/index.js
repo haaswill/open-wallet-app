@@ -8,4 +8,4 @@ const Spinner = ({ size }) => (
   </View>
 );
 
-export default Spinner;
+export { Spinner };

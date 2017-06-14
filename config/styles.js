@@ -7,7 +7,8 @@ const colors = {
   successColor: '#7FFF24',
   warningColor: '#FF9900',
   facebookColor: '#3b5998',
-  googlePlusColor: '#d34836'
+  googlePlusColor: '#d34836',
+  borderColor: '#ddd'
 };
 
 const sizes = {

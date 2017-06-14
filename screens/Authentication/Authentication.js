@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import styles from './styles';
 import { facebookLoginAsync, googleLoginAsync } from '../../actions';
-import Spinner from '../../components/Spinner';
+import { Spinner } from '../../components';
 
 class Authentication extends Component {
   componentWillReceiveProps(nextProps) {

@@ -12,4 +12,4 @@ const Slides = ({ children }) => (
   </ScrollView>
 );
 
-export default Slides;
+export { Slides };

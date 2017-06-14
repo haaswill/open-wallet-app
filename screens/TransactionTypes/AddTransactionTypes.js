@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
+import { MainView } from '../../components';
 import styles from './styles';
 
 class AddTransactionTypes extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <MainView style={styles.container}>
         <Text>AddTransactionTypes Screen</Text>
         <Text>AddTransactionTypes Screen</Text>
         <Text>AddTransactionTypes Screen</Text>
-      </View>
+      </MainView>
     );
   }
 }

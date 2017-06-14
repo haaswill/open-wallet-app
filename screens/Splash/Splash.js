@@ -4,7 +4,7 @@ import { AppLoading } from 'expo';
 import { Button } from 'react-native-elements';
 import { colors } from '../../config/styles';
 import styles from './styles';
-import Slides from '../../components/Slides';
+import { Slides } from '../../components';
 
 const slidesData = [
   { text: 'Welcome to Open Wallet', color: colors.secondaryColor },
