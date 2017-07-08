@@ -16,7 +16,7 @@ class Splash extends Component {
   state = { token: null }
 
   async componentWillMount() {
-    const token = await AsyncStorage.getItem('token');
+    const token = await AsyncStorage.getItem('tokenn');
     if (token) {
       this.props.navigation.navigate('Home');
     } else {

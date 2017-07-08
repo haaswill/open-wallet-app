@@ -20,7 +20,7 @@ export const googleLoginAsync = () => async dispatch => {
   await handleUserAsync(token, 'google', dispatch);
 };
 
-export const loginUserAsync = (token) => async dispatch => {
+export const loginUserAsync = token => async dispatch => {
   handleUserAsync(token, dispatch);
 };
 
@@ -47,10 +47,12 @@ const handleGoogleLoginAsync = async dispatch => {
 };
 
 const handleUserAsync = async (token, provider, dispatch) => {
+  console.log(token);
   try {
     const { data } = await axios.post(`${settings.apiUrl}/user/${provider}`, { token });
     saveTokenAsync(data.token);
-    dispatch({ type: LOGIN_SUCCESS, payload: { user: data } });
+    const authorizationHeader = createAuthorizationHeader(data.token);
+    dispatch({ type: LOGIN_SUCCESS, payload: { user: data, authorizationHeader } });
   } catch (error) {
     dispatch({ type: LOGIN_FAIL });
   }
@@ -59,3 +61,5 @@ const handleUserAsync = async (token, provider, dispatch) => {
 const saveTokenAsync = async token => {
   await AsyncStorage.setItem('token', token);
 };
+
+const createAuthorizationHeader = (token = '') => ({ Authorization: `Bearer ${token}` });

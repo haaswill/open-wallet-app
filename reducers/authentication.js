@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   user: null,
+  authorizationHeader: {},
   loading: false
 };
 
@@ -14,7 +15,11 @@ export default (state = initialState, action) => {
     case LOGIN_START:
       return { ...initialState, loading: true };
     case LOGIN_SUCCESS:
-      return { ...initialState, user: action.payload };
+      return {
+        ...initialState,
+        user: action.payload.user,
+        authorizationHeader: action.payload.authorizationHeader
+      };
     case LOGIN_FAIL:
       return initialState;
     default:
