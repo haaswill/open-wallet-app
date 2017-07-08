@@ -21,7 +21,6 @@ export default (state = initialState, action) => {
         accountBalance: action.payload.accountBalance
       };
     case FETCH_WALLETS_FAIL:
-      console.log(action.payload);
       return initialState;
     default:
       return state;

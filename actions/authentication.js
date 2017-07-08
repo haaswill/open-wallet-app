@@ -47,7 +47,6 @@ const handleGoogleLoginAsync = async dispatch => {
 };
 
 const handleUserAsync = async (token, provider, dispatch) => {
-  console.log(token);
   try {
     const { data } = await axios.post(`${settings.apiUrl}/user/${provider}`, { token });
     saveTokenAsync(data.token);

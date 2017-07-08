@@ -10,7 +10,6 @@ export const fetchWallets = () => async (dispatch, getState) => {
   try {
     const { data } =
       await get('wallet', { headers: getState().authentication.authorizationHeader });
-    console.log(data);
     const accountBalance = getAccountBalance(data);
     dispatch({ type: FETCH_WALLETS_SUCCESS, payload: { wallets: data, accountBalance } });
   } catch (error) {
