@@ -2,15 +2,10 @@ import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { Card } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { fetchWallets } from '../../actions';
 import { MainView } from '../../components';
 import styles from './styles';
 
 class Home extends Component {
-  componentWillMount() {
-    this.props.fetchWallets();
-  }
-
   render() {
     return (
       <MainView>
@@ -29,4 +24,4 @@ class Home extends Component {
 
 const mapStateToProps = ({ wallet }) => wallet;
 
-export default connect(mapStateToProps, { fetchWallets })(Home);
+export default connect(mapStateToProps)(Home);

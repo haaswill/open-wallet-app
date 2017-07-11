@@ -1,11 +1,12 @@
 import { AsyncStorage } from 'react-native';
 import { Facebook, Google } from 'expo';
-import axios from 'axios';
 import { settings } from '../config/settings';
+import { post } from '../handlers';
 import {
   LOGIN_START,
   LOGIN_SUCCESS,
-  LOGIN_FAIL
+  LOGIN_FAIL,
+  FETCH_WALLETS_SUCCESS
 } from './types';
 
 export const facebookLoginAsync = () => async dispatch => {
@@ -18,10 +19,6 @@ export const googleLoginAsync = () => async dispatch => {
   dispatch({ type: LOGIN_START });
   const token = await handleGoogleLoginAsync(dispatch);
   await handleUserAsync(token, 'google', dispatch);
-};
-
-export const loginUserAsync = token => async dispatch => {
-  handleUserAsync(token, dispatch);
 };
 
 const handleFacebookLoginAsync = async dispatch => {
@@ -48,10 +45,15 @@ const handleGoogleLoginAsync = async dispatch => {
 
 const handleUserAsync = async (token, provider, dispatch) => {
   try {
-    const { data } = await axios.post(`${settings.apiUrl}/user/${provider}`, { token });
-    saveTokenAsync(data.token);
-    const authorizationHeader = createAuthorizationHeader(data.token);
-    dispatch({ type: LOGIN_SUCCESS, payload: { user: data, authorizationHeader } });
+    const { data: { user, wallets, accountBalance } } = await post(`user/${provider}`, { token });
+    await saveTokenAsync(user.token);
+    const authorizationHeader = createAuthorizationHeader(user.token);
+    console.log('user: ', user);
+    console.log('wallets: ', wallets);
+    console.log('accountBalance: ', accountBalance);
+    console.log('authorizationHeader: ', authorizationHeader);
+    dispatch({ type: FETCH_WALLETS_SUCCESS, payload: { wallets, accountBalance } });
+    dispatch({ type: LOGIN_SUCCESS, payload: { user, authorizationHeader } });
   } catch (error) {
     dispatch({ type: LOGIN_FAIL });
   }
