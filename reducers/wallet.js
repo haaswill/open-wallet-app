@@ -17,11 +17,12 @@ export default (state = initialState, action) => {
     case FETCH_WALLETS_SUCCESS:
       return {
         ...state,
+        loading: false,
         wallets: action.payload.wallets,
         accountBalance: action.payload.accountBalance
       };
     case FETCH_WALLETS_FAIL:
-      return initialState;
+      return { ...state, loading: false };
     default:
       return state;
   }

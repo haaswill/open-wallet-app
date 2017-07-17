@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, TabNavigator, StackNavigator } from 'react-navigation';
-import { Button, Icon } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import { colors } from '../config/styles';
 
 // Screens
@@ -29,7 +29,6 @@ export const MainNavigator = TabNavigator(
     Home: {
       screen: Home,
       navigationOptions: {
-        title: 'Home',
         tabBarIcon: ({ tintColor }) =>
           <Icon name='home' size={30} color={tintColor} type='material-community' />
       }
@@ -37,7 +36,6 @@ export const MainNavigator = TabNavigator(
     AddTransaction: {
       screen: AddTransaction,
       navigationOptions: {
-        title: 'Add Transaction',
         tabBarIcon: ({ tintColor }) =>
           <Icon name='plus-circle' size={30} color={tintColor} type='material-community' />
       }
@@ -45,7 +43,6 @@ export const MainNavigator = TabNavigator(
     Settings: {
       screen: Settings,
       navigationOptions: {
-        title: 'Settings',
         tabBarIcon: ({ tintColor }) =>
           <Icon name='settings' size={30} color={tintColor} type='material-community' />
       }
@@ -53,8 +50,11 @@ export const MainNavigator = TabNavigator(
   }, {
     tabBarPosition: 'bottom',
     tabBarOptions: {
-      labelStyle: { fontSize: 12 },
-      activeTintColor: colors.primaryColor
+      activeTintColor: colors.primaryColor,
+      showLabel: false,
+      style: {
+        backgroundColor: colors.secondaryColor
+      }
     }
   }
 );

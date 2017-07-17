@@ -66,6 +66,6 @@ class Authentication extends Component {
   }
 }
 
-const mapStateToProps = ({ authentication: { user, loading } }) => ({ user, loading });
+const mapStateToProps = ({ authentication }) => authentication;
 
 export default connect(mapStateToProps, { facebookLoginAsync, googleLoginAsync })(Authentication);

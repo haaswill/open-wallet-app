@@ -5,8 +5,7 @@ import { post } from '../handlers';
 import {
   LOGIN_START,
   LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  FETCH_WALLETS_SUCCESS
+  LOGIN_FAIL
 } from './types';
 
 export const facebookLoginAsync = () => async dispatch => {
@@ -45,14 +44,9 @@ const handleGoogleLoginAsync = async dispatch => {
 
 const handleUserAsync = async (token, provider, dispatch) => {
   try {
-    const { data: { user, wallets, accountBalance } } = await post(`user/${provider}`, { token });
+    const { data: { user } } = await post(`user/${provider}`, { token });
     await saveTokenAsync(user.token);
     const authorizationHeader = createAuthorizationHeader(user.token);
-    console.log('user: ', user);
-    console.log('wallets: ', wallets);
-    console.log('accountBalance: ', accountBalance);
-    console.log('authorizationHeader: ', authorizationHeader);
-    dispatch({ type: FETCH_WALLETS_SUCCESS, payload: { wallets, accountBalance } });
     dispatch({ type: LOGIN_SUCCESS, payload: { user, authorizationHeader } });
   } catch (error) {
     dispatch({ type: LOGIN_FAIL });

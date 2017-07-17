@@ -13,15 +13,16 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_START:
-      return { ...initialState, loading: true };
+      return { ...state, loading: true };
     case LOGIN_SUCCESS:
       return {
+        ...state,
         ...initialState,
         user: action.payload.user,
-        authorizationHeader: action.payload.authorizationHeader
+        authorizationHeader: action.payload.authorizationHeader,
       };
     case LOGIN_FAIL:
-      return initialState;
+      return { ...state, ...initialState };
     default:
       return state;
   }
