@@ -2,20 +2,10 @@ import { StyleSheet } from 'react-native';
 import { colors, sizes } from '../../config/styles';
 
 export default StyleSheet.create({
-  accountBalance: {
-    backgroundColor: colors.primaryColor,
-    margin: 20,
-    padding: 10
-  },
   accountBalanceTitle: {
-    color: colors.secondaryColor,
     fontSize: 26,
     fontWeight: 'bold',
     textAlign: 'center'
-  },
-  container: {
-    backgroundColor: colors.secondaryColor,
-    margin: 10
   },
   divider: {
     alignSelf: 'center',
@@ -40,7 +30,9 @@ export default StyleSheet.create({
     margin: 5
   },
   transactionDescription: {
-    flex: 3
+    flex: 3,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   walletContainer: {
     alignItems: 'center',

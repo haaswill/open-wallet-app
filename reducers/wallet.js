@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         wallets: action.payload.wallets,
-        accountBalance: action.payload.accountBalance
+        accountBalance: Number.parseFloat(action.payload.accountBalance)
       };
     case FETCH_WALLETS_FAIL:
       return { ...state, loading: false };

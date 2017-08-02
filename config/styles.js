@@ -10,7 +10,9 @@ const colors = {
   googlePlusColor: '#d34836',
   borderColor: '#ddd',
   white: '#ffffff',
-  black: '#000000'
+  black: '#000000',
+  incomeColor: '#27ae60',
+  expenseColor: '#e74c3c'
 };
 
 const sizes = {
