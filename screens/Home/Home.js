@@ -20,7 +20,12 @@ class Home extends Component {
       return <Spinner size='small' />;
     }
     return (
-      <Text style={[styles.accountBalanceTitle, { color: accountBalance > 0 ? colors.incomeColor : colors.expenseColor }]}>
+      <Text
+        style={[
+          styles.accountBalanceTitle,
+          { color: accountBalance > 0 ? colors.incomeColor : colors.expenseColor }
+        ]}
+      >
         {accountBalance}
       </Text>
     );

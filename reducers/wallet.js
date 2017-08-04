@@ -22,7 +22,10 @@ export default (state = initialState, action) => {
         accountBalance: Number.parseFloat(action.payload.accountBalance)
       };
     case FETCH_WALLETS_FAIL:
-      return { ...state, loading: false };
+      return {
+        ...state,
+        ...initialState
+      };
     default:
       return state;
   }
