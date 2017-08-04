@@ -6,6 +6,7 @@ import { fetchAccountBalance, fetchExpenses, fetchIncomes } from '../../actions'
 import { MainView, Spinner, MainCard } from '../../components';
 import { colors } from '../../config/styles';
 import styles from './styles';
+import { formatCurrency } from '../../handlers';
 
 class Home extends Component {
   componentWillMount() {
@@ -26,7 +27,7 @@ class Home extends Component {
           { color: accountBalance > 0 ? colors.incomeColor : colors.expenseColor }
         ]}
       >
-        {accountBalance}
+        {formatCurrency(accountBalance)}
       </Text>
     );
   }
@@ -49,7 +50,7 @@ class Home extends Component {
         />
         <View style={styles.walletDescription}>
           <Text style={styles.title}>{wallet.description}</Text>
-          <Text style={styles.text}>{wallet.value}</Text>
+          <Text style={styles.text}>{formatCurrency(wallet.value)}</Text>
         </View>
         <Icon
           name='chevron-right'
@@ -76,7 +77,9 @@ class Home extends Component {
         />
         <View style={styles.transactionDescription}>
           <Text style={styles.text}>{expense.description}</Text>
-          <Text style={[styles.text, { color: '#ff0000' }]}>{expense.value}</Text>
+          <Text style={[styles.text, { color: colors.expenseColor }]}>
+            {formatCurrency(expense.value)}
+          </Text>
         </View>
         <Icon
           name='chevron-right'
@@ -103,7 +106,9 @@ class Home extends Component {
         />
         <View style={styles.transactionDescription}>
           <Text style={styles.text}>{income.description}</Text>
-          <Text style={[styles.text, { color: '#00ff00' }]}>{income.value}</Text>
+          <Text style={[styles.text, { color: colors.incomeColor }]}>
+            {formatCurrency(income.value)}
+          </Text>
         </View>
         <Icon
           name='chevron-right'
@@ -119,18 +124,6 @@ class Home extends Component {
     return (
       <MainView>
         <ScrollView>
-          <MainCard title='Account Balance'>
-            {this.renderAccountBalance()}
-          </MainCard>
-          <MainCard title='Wallets'>
-            {this.renderWallets()}
-          </MainCard>
-          <MainCard title='Expenses'>
-            {this.renderExpenses()}
-          </MainCard>
-          <MainCard title='Incomes'>
-            {this.renderIncomes()}
-          </MainCard>
         </ScrollView>
       </MainView>
     );
