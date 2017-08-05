@@ -1,12 +1,12 @@
 {
   "name": "open-wallet-app",
-  "description": "An empty new project",
+  "description": "Financial management made easy",
   "slug": "open-wallet-app",
   "privacy": "public",
   "sdkVersion": "17.0.0",
   "version": "1.0.0",
   "orientation": "portrait",
-  "primaryColor": "#1693a5",
+  "primaryColor": "#1bbc9b",
   "icon": "./assets/icons/app.png",
   "loading": {
     "icon": "./assets/icons/loading.png",

@@ -2,9 +2,13 @@ import { StyleSheet } from 'react-native';
 import { colors, sizes } from '../../config/styles';
 
 export default StyleSheet.create({
-  container: {
+  body: {
     backgroundColor: colors.white,
-    flex: 1,
+    flex: 12,
     paddingTop: sizes.statusBar
+  },
+  container: {
+    backgroundColor: colors.primaryColor,
+    flex: 1
   }
 });

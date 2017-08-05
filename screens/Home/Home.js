@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, ScrollView } from 'react-native';
 import { Icon, List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchAccountBalance, fetchExpenses, fetchIncomes } from '../../actions';
-import { MainView, Spinner } from '../../components';
+import { MainView, Spinner, Header } from '../../components';
 import { colors } from '../../config/styles';
 import styles from './styles';
 import { formatCurrency } from '../../handlers';
@@ -59,7 +59,9 @@ class Home extends Component {
 
   render() {
     return (
-      <MainView>
+      <MainView
+        header={<Header title='August' />}
+      >
         <ScrollView>
           <List style={styles.container}>
             {this.renderWallets()}
