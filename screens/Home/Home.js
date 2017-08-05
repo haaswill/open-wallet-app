@@ -15,6 +15,25 @@ class Home extends Component {
     this.props.fetchIncomes();
   }
 
+  renderHeader() {
+    return (
+      <Header
+        elementLeft={this.renderIcon('chevron-left')}
+        elementRight={this.renderIcon('chevron-right')}
+        title='August'
+      />
+    );
+  }
+
+  renderIcon(name) {
+    return (<Icon
+      color={colors.white}
+      name={name}
+      size={35}
+      type='material-community'
+    />);
+  }
+
   renderAccountBalance() {
     const { loading, accountBalance } = this.props;
     if (loading) {
@@ -59,9 +78,7 @@ class Home extends Component {
 
   render() {
     return (
-      <MainView
-        header={<Header title='August' />}
-      >
+      <MainView header={this.renderHeader()}>
         <ScrollView>
           <List style={styles.container}>
             {this.renderWallets()}
