@@ -14,7 +14,7 @@ import { AddTransaction, ListTransactions } from '../screens/Transactions';
 import { AddTransactionTypes } from '../screens/TransactionTypes';
 import { Settings } from '../screens/Settings';
 
-export const AuthenticationNavigator = StackNavigator({
+const AuthenticationNavigator = StackNavigator({
   Authentication: {
     screen: Authentication,
     navigationOptions: {
@@ -24,7 +24,7 @@ export const AuthenticationNavigator = StackNavigator({
   }
 });
 
-export const MainNavigator = TabNavigator(
+const MainNavigator = TabNavigator(
   {
     Home: {
       screen: Home,
@@ -51,9 +51,10 @@ export const MainNavigator = TabNavigator(
     tabBarPosition: 'bottom',
     tabBarOptions: {
       activeTintColor: colors.primaryColor,
+      inactiveTintColor: colors.inactiveColor,
       showLabel: false,
       style: {
-        backgroundColor: colors.secondaryColor
+        backgroundColor: colors.white
       }
     }
   }
