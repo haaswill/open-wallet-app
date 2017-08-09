@@ -16,7 +16,7 @@ const store = createStore(
 // use .purge() to clean app state
 persistStore(store, {
   storage: AsyncStorage,
-  whitelist: ['authentication', 'wallet', 'transaction']
+  whitelist: ['authentication']
 });
 
 export default store;

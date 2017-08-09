@@ -4,7 +4,7 @@ import { colors } from '../../config/styles';
 export default StyleSheet.create({
   container: {
     alignItems: 'stretch',
-    backgroundColor: colors.secondaryColor,
+    backgroundColor: colors.white,
     flex: 1,
     justifyContent: 'space-around',
   },

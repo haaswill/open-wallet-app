@@ -7,16 +7,16 @@ import styles from './styles';
 import { Slides } from '../../components';
 
 const slidesData = [
-  { text: 'Welcome to Open Wallet', color: colors.secondaryColor },
-  { text: 'A simple way to manage your finances', color: colors.secondaryColor },
-  { text: 'And it\'s free!', color: colors.secondaryColor }
+  { text: 'Welcome to Open Wallet', color: colors.white },
+  { text: 'A simple way to manage your finances', color: colors.white },
+  { text: 'And it\'s free!', color: colors.white }
 ];
 
 class Splash extends Component {
   state = { token: null }
 
   async componentWillMount() {
-    //await AsyncStorage.clear();
+    await AsyncStorage.clear();
     const token = await AsyncStorage.getItem('token');
     if (token) {
       this.props.navigation.navigate('Home');
@@ -49,7 +49,7 @@ class Splash extends Component {
           iconRight
           title="Go To Login!"
           icon={{ name: 'arrow-forward' }}
-          color={colors.secondaryColor}
+          color={colors.white}
           buttonStyle={styles.button}
           onPress={this.onSlidesComplete}
         />

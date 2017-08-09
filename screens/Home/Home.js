@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
 import { Text, ScrollView } from 'react-native';
-import { Icon, List, ListItem } from 'react-native-elements';
+import { Icon, List } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchAccountBalance, fetchExpenses, fetchIncomes } from '../../actions';
-import { MainView, Spinner, Header } from '../../components';
+import { MainView, Spinner, Header, TogglableListItem } from '../../components';
 import { colors } from '../../config/styles';
 import styles from './styles';
 import { formatCurrency } from '../../handlers';
 
 class Home extends Component {
+  state = {
+    loading: false,
+    openedWallet: null
+  };
+
   componentWillMount() {
     this.props.fetchAccountBalance();
     this.props.fetchExpenses();
     this.props.fetchIncomes();
+  }
+
+  onClickRightIcon = id => {
   }
 
   renderHeader() {
@@ -52,13 +60,16 @@ class Home extends Component {
   }
 
   renderWallets() {
-    const { loading, wallets } = this.props;
+    const { wallets } = this.props;
+    const { loading } = this.state;
     if (loading && !wallets) {
       return <Spinner size='small' />;
     }
     return wallets.map(wallet => (
-      <ListItem
+      <TogglableListItem
         containerStyle={styles.itemContainer}
+        id={wallet._id}
+        isOpened
         key={wallet._id}
         leftIcon={<Icon
           color={colors.inactiveColor}
@@ -67,6 +78,7 @@ class Home extends Component {
           size={40}
           type='material-community'
         />}
+        onPress={this.onClickRightIcon}
         rightIcon={{ name: 'chevron-right', type: 'material-community', size: 60 }}
         subtitle={formatCurrency(wallet.value)}
         subtitleStyle={styles.subtitle}

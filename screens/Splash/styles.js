@@ -9,10 +9,11 @@ export default StyleSheet.create({
     width: sizes.screenWidth
   },
   text: {
-    fontSize: 30,
     color: colors.primaryColor,
-    textAlign: 'center',
-    marginBottom: 15
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    textAlign: 'center'
   },
   button: {
     backgroundColor: colors.primaryColor

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button } from 'react-native-elements';
 import styles from './styles';
 import { facebookLoginAsync, googleLoginAsync } from '../../actions';
-import { Spinner } from '../../components';
+import { MainView, Spinner, Header } from '../../components';
 
 class Authentication extends Component {
   componentWillReceiveProps(nextProps) {
@@ -35,7 +35,10 @@ class Authentication extends Component {
       );
     }
     return (
-      <View style={container}>
+      <MainView
+        header={this.renderHeader()}
+        innerContainerStyle={container}
+      >
         <Button
           raised
           large
@@ -55,7 +58,15 @@ class Authentication extends Component {
           buttonStyle={googleButton}
           onPress={this.onGoogleButtonPress}
         />
-      </View>
+      </MainView>
+    );
+  }
+
+  renderHeader() {
+    return (
+      <Header
+        title='Authentication'
+      />
     );
   }
 

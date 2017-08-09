@@ -17,15 +17,19 @@ import { Settings } from '../screens/Settings';
 const renderTabBarIcon = (name, tintColor) =>
   <Icon name={name} size={30} color={tintColor} type='material-community' />;
 
-const AuthenticationNavigator = StackNavigator({
-  Authentication: {
-    screen: Authentication,
-    navigationOptions: {
-      title: 'Authentication',
-      headerTintColor: colors.primaryColor
+const AuthenticationNavigator = StackNavigator(
+  {
+    Authentication: {
+      screen: Authentication,
+      navigationOptions: {
+        title: 'Authentication'
+      }
     }
+  },
+  {
+    headerMode: 'none'
   }
-});
+);
 
 const MainNavigator = TabNavigator(
   {
