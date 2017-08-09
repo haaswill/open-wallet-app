@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
-import { MainView } from '../../components';
+import { MainView, Header } from '../../components';
 import styles from './styles';
 
 class Settings extends Component {
+  renderHeader() {
+    return (
+      <Header title='Settings' />
+    );
+  }
+
   render() {
     return (
-      <MainView style={styles.container}>
+      <MainView header={this.renderHeader()}>
         <Text>Settings Screen</Text>
         <Text>Settings Screen</Text>
         <Text>Settings Screen</Text>

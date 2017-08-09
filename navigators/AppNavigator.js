@@ -14,6 +14,9 @@ import { AddTransaction, ListTransactions } from '../screens/Transactions';
 import { AddTransactionTypes } from '../screens/TransactionTypes';
 import { Settings } from '../screens/Settings';
 
+const renderTabBarIcon = (name, tintColor) =>
+  <Icon name={name} size={30} color={tintColor} type='material-community' />;
+
 const AuthenticationNavigator = StackNavigator({
   Authentication: {
     screen: Authentication,
@@ -29,25 +32,23 @@ const MainNavigator = TabNavigator(
     Home: {
       screen: Home,
       navigationOptions: {
-        tabBarIcon: ({ tintColor }) =>
-          <Icon name='home' size={30} color={tintColor} type='material-community' />
+        tabBarIcon: ({ tintColor }) => renderTabBarIcon('home', tintColor)
       }
     },
     AddTransaction: {
       screen: AddTransaction,
       navigationOptions: {
-        tabBarIcon: ({ tintColor }) =>
-          <Icon name='plus-circle' size={30} color={tintColor} type='material-community' />
+        tabBarIcon: ({ tintColor }) => renderTabBarIcon('plus-circle', tintColor)
       }
     },
     Settings: {
       screen: Settings,
       navigationOptions: {
-        tabBarIcon: ({ tintColor }) =>
-          <Icon name='settings' size={30} color={tintColor} type='material-community' />
+        tabBarIcon: ({ tintColor }) => renderTabBarIcon('settings', tintColor)
       }
     }
   }, {
+    animationEnabled: true,
     tabBarPosition: 'bottom',
     tabBarOptions: {
       activeTintColor: colors.primaryColor,
@@ -56,7 +57,8 @@ const MainNavigator = TabNavigator(
       style: {
         backgroundColor: colors.white
       }
-    }
+    },
+    swipeEnabled: true
   }
 );
 

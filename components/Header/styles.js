@@ -5,7 +5,7 @@ export default StyleSheet.create({
   container: {
     backgroundColor: colors.primaryColor,
     flexDirection: 'row',
-    flex: 1,
+    minHeight: 60,
     justifyContent: 'space-between',
     marginTop: sizes.statusBar,
     paddingHorizontal: 20,
