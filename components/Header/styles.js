@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, sizes } from '../../config/styles';
+import { colors } from '../../config/styles';
 
 export default StyleSheet.create({
   container: {
@@ -7,7 +7,6 @@ export default StyleSheet.create({
     flexDirection: 'row',
     minHeight: 60,
     justifyContent: 'space-between',
-    marginTop: sizes.statusBar,
     paddingHorizontal: 20,
     paddingVertical: 20
   },

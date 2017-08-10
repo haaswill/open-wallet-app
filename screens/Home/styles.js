@@ -3,7 +3,9 @@ import { colors } from '../../config/styles';
 
 export default StyleSheet.create({
   container: {
-
+    borderBottomWidth: 0,
+    borderTopWidth: 0,
+    marginTop: 0
   },
   icon: {
     marginLeft: 20,
@@ -12,6 +14,9 @@ export default StyleSheet.create({
   itemContainer: {
     paddingTop: 30,
     paddingBottom: 30
+  },
+  outerContainer: {
+    justifyContent: 'center'
   },
   subtitle: {
     marginTop: 10,

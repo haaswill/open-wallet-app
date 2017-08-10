@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import { Text, ScrollView } from 'react-native';
+import { Text } from 'react-native';
 import { Icon, List } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchAccountBalance } from '../../actions';
-import { MainView, Spinner, Header, TogglableListItem } from '../../components';
+import { MainScrollView, Spinner, Header, TogglableListItem } from '../../components';
 import { colors } from '../../config/styles';
 import styles from './styles';
 import { formatCurrency } from '../../handlers';
 
 class Home extends Component {
   state = {
-    loading: false,
     openedWallet: null
   };
 
@@ -41,8 +40,8 @@ class Home extends Component {
   }
 
   renderAccountBalance() {
-    const { loading, accountBalance } = this.props;
-    if (loading) {
+    const { accountBalance } = this.props;
+    if (!this.state.loading) {
       return <Spinner size='small' />;
     }
     return (
@@ -57,25 +56,33 @@ class Home extends Component {
     );
   }
 
-  renderWallets() {
-    const { wallets } = this.props;
-    const { loading } = this.state;
-    if (loading && !wallets) {
-      return <Spinner size='small' />;
+  renderList() {
+    if (this.props.wallets === [] || true) {
+      return <Spinner size='large' />;
     }
-    return wallets.map(wallet => (
+    return (
+      <List containerStyle={styles.container}>
+        {this.renderWallets()}
+      </List>
+    );
+  }
+
+  renderWallets() {
+    return this.props.wallets.map(wallet => (
       <TogglableListItem
         containerStyle={styles.itemContainer}
         id={wallet._id}
         isOpened
         key={wallet._id}
-        leftIcon={<Icon
-          color={colors.inactiveColor}
-          iconStyle={styles.icon}
-          name={wallet.icon}
-          size={40}
-          type='material-community'
-        />}
+        leftIcon={
+          <Icon
+            color={colors.inactiveColor}
+            iconStyle={styles.icon}
+            name={wallet.icon}
+            size={40}
+            type='material-community'
+          />
+        }
         onPress={this.onClickRightIcon}
         rightIcon={{ name: 'chevron-right', type: 'material-community', size: 60 }}
         subtitle={formatCurrency(wallet.value)}
@@ -87,15 +94,13 @@ class Home extends Component {
   }
 
   render() {
-    console.log('rendered');
     return (
-      <MainView header={this.renderHeader()}>
-        <ScrollView>
-          <List style={styles.container}>
-            {this.renderWallets()}
-          </List>
-        </ScrollView>
-      </MainView>
+      <MainScrollView
+        header={this.renderHeader()}
+        innerContainerStyle={styles.outerContainer}
+      >
+        {this.renderList()}
+      </MainScrollView>
     );
   }
 }
