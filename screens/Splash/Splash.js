@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage } from 'react-native';
+import { View, Text, AsyncStorage, StatusBar } from 'react-native';
 import { AppLoading } from 'expo';
 import { Button } from 'react-native-elements';
 import { colors } from '../../config/styles';
@@ -63,6 +63,7 @@ class Splash extends Component {
     }
     return (
       <Slides>
+        <StatusBar barStyle='dark-content' />
         {this.renderSlides()}
       </Slides>
     );
