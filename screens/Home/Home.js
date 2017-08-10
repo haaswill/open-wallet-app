@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, ScrollView } from 'react-native';
 import { Icon, List } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { fetchAccountBalance, fetchExpenses, fetchIncomes } from '../../actions';
+import { fetchAccountBalance } from '../../actions';
 import { MainView, Spinner, Header, TogglableListItem } from '../../components';
 import { colors } from '../../config/styles';
 import styles from './styles';
@@ -16,8 +16,6 @@ class Home extends Component {
 
   componentWillMount() {
     this.props.fetchAccountBalance();
-    this.props.fetchExpenses();
-    this.props.fetchIncomes();
   }
 
   onClickRightIcon = id => {
@@ -89,6 +87,7 @@ class Home extends Component {
   }
 
   render() {
+    console.log('rendered');
     return (
       <MainView header={this.renderHeader()}>
         <ScrollView>
@@ -108,7 +107,5 @@ const mapStateToProps = ({ wallet, transaction }) => {
 };
 
 export default connect(mapStateToProps, {
-  fetchAccountBalance,
-  fetchExpenses,
-  fetchIncomes
+  fetchAccountBalance
 })(Home);

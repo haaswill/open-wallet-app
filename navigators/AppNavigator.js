@@ -17,20 +17,6 @@ import { Settings } from '../screens/Settings';
 const renderTabBarIcon = (name, tintColor) =>
   <Icon name={name} size={30} color={tintColor} type='material-community' />;
 
-const AuthenticationNavigator = StackNavigator(
-  {
-    Authentication: {
-      screen: Authentication,
-      navigationOptions: {
-        title: 'Authentication'
-      }
-    }
-  },
-  {
-    headerMode: 'none'
-  }
-);
-
 const MainNavigator = TabNavigator(
   {
     Home: {
@@ -72,7 +58,7 @@ export const AppNavigator = TabNavigator(
       screen: Splash
     },
     Authentication: {
-      screen: AuthenticationNavigator
+      screen: Authentication
     },
     Main: {
       screen: MainNavigator
