@@ -39,25 +39,28 @@ class Authentication extends Component {
         header={this.renderHeader()}
         innerContainerStyle={container}
       >
-        <Button
-          raised
-          large
-          iconRight
-          title='Access With Facebook'
-          icon={{ name: 'facebook', type: 'material-community' }}
-          buttonStyle={facebookButton}
-          onPress={this.onFacebookButtonPress}
-        />
-        <Text style={text}>OR</Text>
-        <Button
-          raised
-          large
-          iconRight
-          title='Access With Google'
-          icon={{ name: 'google', type: 'material-community' }}
-          buttonStyle={googleButton}
-          onPress={this.onGoogleButtonPress}
-        />
+        <View style={styles.buttonContainer}>
+          <Button
+            buttonStyle={facebookButton}
+            iconRight
+            icon={{ name: 'facebook', type: 'material-community' }}
+            large
+            onPress={this.onFacebookButtonPress}
+            raised
+            title='Access With Facebook'
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            buttonStyle={googleButton}
+            iconRight
+            icon={{ name: 'google', type: 'material-community' }}
+            large
+            onPress={this.onGoogleButtonPress}
+            raised
+            title='Access With Google'
+          />
+        </View>
       </MainView>
     );
   }
