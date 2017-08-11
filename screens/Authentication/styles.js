@@ -2,10 +2,6 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../config/styles';
 
 export default StyleSheet.create({
-  buttonContainer: {
-    flex: 1,
-    padding: 10
-  },
   container: {
     alignItems: 'stretch',
     backgroundColor: colors.white,
@@ -13,19 +9,14 @@ export default StyleSheet.create({
     justifyContent: 'space-around'
   },
   facebookButton: {
-    backgroundColor: colors.facebookColor,
-    height: '100%',
-    width: '100%'
+    backgroundColor: colors.facebookColor
   },
   googleButton: {
-    backgroundColor: colors.googlePlusColor,
-    height: '100%',
-    width: '100%'
+    backgroundColor: colors.googlePlusColor
   },
   text: {
     color: colors.primaryColor,
-    fontSize: 36,
-    fontWeight: '900',
+    fontWeight: 'bold',
     textAlign: 'center'
   }
 });

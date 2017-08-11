@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
-import { Button } from 'react-native-elements';
+import { Button, Text } from 'react-native-elements';
 import styles from './styles';
 import { facebookLoginAsync, googleLoginAsync } from '../../actions';
 import { MainView, Spinner, Header } from '../../components';
@@ -39,28 +39,25 @@ class Authentication extends Component {
         header={this.renderHeader()}
         innerContainerStyle={container}
       >
-        <View style={styles.buttonContainer}>
-          <Button
-            buttonStyle={facebookButton}
-            iconRight
-            icon={{ name: 'facebook', type: 'material-community' }}
-            large
-            onPress={this.onFacebookButtonPress}
-            raised
-            title='Access With Facebook'
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            buttonStyle={googleButton}
-            iconRight
-            icon={{ name: 'google', type: 'material-community' }}
-            large
-            onPress={this.onGoogleButtonPress}
-            raised
-            title='Access With Google'
-          />
-        </View>
+        <Button
+          buttonStyle={facebookButton}
+          iconRight
+          icon={{ name: 'facebook', type: 'material-community' }}
+          large
+          onPress={this.onFacebookButtonPress}
+          raised
+          title='Access With Facebook'
+        />
+        <Text h1 style={text}>or</Text>
+        <Button
+          buttonStyle={googleButton}
+          iconRight
+          icon={{ name: 'google', type: 'material-community' }}
+          large
+          onPress={this.onGoogleButtonPress}
+          raised
+          title='Access With Google'
+        />
       </MainView>
     );
   }

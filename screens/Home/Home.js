@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { Icon, List } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchAccountBalance } from '../../actions';
@@ -31,12 +31,14 @@ class Home extends Component {
   }
 
   renderIcon(name) {
-    return (<Icon
-      color={colors.white}
-      name={name}
-      size={35}
-      type='material-community'
-    />);
+    return (
+      <Icon
+        color={colors.white}
+        name={name}
+        size={35}
+        type='material-community'
+      />
+    );
   }
 
   renderAccountBalance() {
@@ -58,7 +60,9 @@ class Home extends Component {
 
   renderList() {
     if (this.props.wallets === [] || true) {
-      return <Spinner size='large' />;
+      return (
+        <Spinner size='large' />
+      );
     }
     return (
       <List containerStyle={styles.container}>
@@ -97,7 +101,6 @@ class Home extends Component {
     return (
       <MainScrollView
         header={this.renderHeader()}
-        innerContainerStyle={styles.outerContainer}
       >
         {this.renderList()}
       </MainScrollView>
