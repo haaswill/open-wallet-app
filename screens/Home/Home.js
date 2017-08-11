@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 import { Icon, List } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchAccountBalance } from '../../actions';
@@ -10,6 +10,7 @@ import { formatCurrency } from '../../handlers';
 
 class Home extends Component {
   state = {
+    loading: true,
     openedWallet: null
   };
 
@@ -43,8 +44,10 @@ class Home extends Component {
 
   renderAccountBalance() {
     const { accountBalance } = this.props;
-    if (!this.state.loading) {
-      return <Spinner size='small' />;
+    if (this.props.wallets === []) {
+      return (
+        <Spinner size='small' />
+      );
     }
     return (
       <Text
@@ -59,7 +62,7 @@ class Home extends Component {
   }
 
   renderList() {
-    if (this.props.wallets === [] || true) {
+    if (this.props.wallets === []) {
       return (
         <Spinner size='large' />
       );
@@ -99,9 +102,7 @@ class Home extends Component {
 
   render() {
     return (
-      <MainScrollView
-        header={this.renderHeader()}
-      >
+      <MainScrollView header={this.renderHeader()}>
         {this.renderList()}
       </MainScrollView>
     );

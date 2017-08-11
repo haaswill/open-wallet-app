@@ -7,7 +7,7 @@ export default StyleSheet.create({
     flex: 1
   },
   container: {
-    backgroundColor: colors.primaryColor,
+    backgroundColor: colors.white,
     flex: 1
   }
 });

@@ -3,8 +3,8 @@ import { ScrollView, View } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
-const MainScrollView = ({ header, children, innerContainerStyle = [], outerContainerStyle }) => (
-  <View style={outerContainerStyle || styles.container}>
+const MainScrollView = ({ header, children, innerContainerStyle = [] }) => (
+  <View style={styles.container}>
     {header}
     <ScrollView contentContainerStyle={[styles.body, innerContainerStyle]}>
       {children}

@@ -5,7 +5,6 @@ export default StyleSheet.create({
   container: {
     borderBottomWidth: 0,
     borderTopWidth: 0,
-    justifyContent: 'flex-start',
     marginTop: 0
   },
   icon: {
