@@ -6,10 +6,10 @@ import styles from './styles';
 const MainScrollView = ({ header, children, innerContainerStyle = [] }) => (
   <View style={styles.container}>
     {header}
-    <ScrollView contentContainerStyle={[styles.body, innerContainerStyle]}>
+    <ScrollView style={[styles.body, innerContainerStyle]}>
       {children}
     </ScrollView>
-  </View>
+  </View >
 );
 
 MainScrollView.propTypes = {
