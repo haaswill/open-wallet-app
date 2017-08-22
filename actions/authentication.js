@@ -5,7 +5,8 @@ import { post } from '../handlers';
 import {
   LOGIN_START,
   LOGIN_SUCCESS,
-  LOGIN_FAIL
+  LOGIN_FAIL,
+  LOGOUT
 } from './types';
 
 export const facebookLoginAsync = () => async dispatch => {
@@ -19,6 +20,8 @@ export const googleLoginAsync = () => async dispatch => {
   const token = await handleGoogleLoginAsync(dispatch);
   await handleUserAsync(token, 'google', dispatch);
 };
+
+export const logOut = () => ({ type: LOGOUT });
 
 const handleFacebookLoginAsync = async dispatch => {
   try {

@@ -1,7 +1,7 @@
 import {
   LOGIN_START,
   LOGIN_SUCCESS,
-  LOGIN_FAIL,
+  LOGIN_FAIL
 } from '../actions/types';
 
 const initialState = {

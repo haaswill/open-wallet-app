@@ -19,6 +19,7 @@ class Home extends Component {
   }
 
   onClickRightIcon = id => {
+    this.setState({ openedWallet: id });
   }
 
   renderHeader() {
@@ -79,7 +80,7 @@ class Home extends Component {
       <TogglableListItem
         containerStyle={styles.itemContainer}
         id={wallet._id}
-        isOpened
+        isOpened={this.state.openedWallet === wallet._id}
         key={wallet._id}
         leftIcon={
           <Icon
@@ -91,7 +92,11 @@ class Home extends Component {
           />
         }
         onPress={this.onClickRightIcon}
-        rightIcon={{ name: 'chevron-right', type: 'material-community', size: 60 }}
+        rightIcon={{
+          name: 'chevron-right',
+          type: 'material-community',
+          size: 60
+        }}
         subtitle={formatCurrency(wallet.value)}
         subtitleStyle={styles.subtitle}
         title={wallet.description}
