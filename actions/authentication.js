@@ -49,7 +49,6 @@ const handleGoogleLoginAsync = async dispatch => {
     }
     return accessToken;
   } catch (error) {
-    console.log(error);
     dispatch({ type: LOGIN_FAIL });
   }
 };

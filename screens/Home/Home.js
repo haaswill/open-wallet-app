@@ -19,7 +19,7 @@ class Home extends Component {
   }
 
   onClickRightIcon = id => {
-    this.setState({ openedWallet: id });
+    //this.setState({ openedWallet: id });
   }
 
   renderHeader() {
@@ -114,10 +114,9 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = ({ wallet, transaction }) => {
+const mapStateToProps = ({ wallet }) => {
   const { wallets, accountBalance } = wallet;
-  const { expenses, incomes } = transaction;
-  return { wallets, accountBalance, expenses, incomes };
+  return { wallets, accountBalance };
 };
 
 export default connect(mapStateToProps, {

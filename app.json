@@ -7,11 +7,12 @@
     "sdkVersion": "18.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
-    "primaryColor": "#1bbc9b",
+    "primaryColor": "#3c3355",
     "icon": "./assets/icons/app.png",
     "loading": {
-      "icon": "./assets/icons/loading.png",
-      "hideExponentText": false
+      "icon": "",
+      "backgroundColor": "#3c3355",
+      "hideExponentText": true
     },
     "packagerOpts": {
       "assetExts": [
