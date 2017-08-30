@@ -3,4 +3,5 @@ export * from './MainView';
 export * from './MainScrollView';
 export * from './Slides';
 export * from './Spinner';
-export * from './TogglableListItem';
+export * from './WalletsListItem';
+export * from './WalletsList';

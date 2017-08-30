@@ -11,7 +11,7 @@
     "icon": "./assets/icons/app.png",
     "loading": {
       "icon": "",
-      "backgroundColor": "#3c3355",
+      "backgroundColor": "#ffffff",
       "hideExponentText": true
     },
     "packagerOpts": {

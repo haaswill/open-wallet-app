@@ -7,9 +7,9 @@ import styles from './styles';
 import { Slides } from '../../components';
 
 const slidesData = [
-  { text: 'Welcome to Open Wallet', color: colors.white },
-  { text: 'A simple way to manage your finances', color: colors.white },
-  { text: 'And it\'s free!', color: colors.white }
+  { text: 'Welcome to Open Wallet' },
+  { text: 'A simple way to manage your finances' },
+  { text: 'And it\'s free!' }
 ];
 
 class Splash extends Component {
@@ -32,7 +32,7 @@ class Splash extends Component {
     return slidesData.map((slide, index) => (
       <View
         key={slide.text}
-        style={[styles.container, { backgroundColor: slide.color }]}
+        style={styles.container}
       >
         <Text style={styles.text}>{slide.text}</Text>
         {this.renderLastSlide(index)}
@@ -47,8 +47,8 @@ class Splash extends Component {
           large
           iconRight
           title="Go To Login!"
-          icon={{ name: 'arrow-forward' }}
-          color={colors.white}
+          icon={{ name: 'arrow-forward', color: colors.primaryColor }}
+          color={colors.primaryColor}
           buttonStyle={styles.button}
           onPress={this.onSlidesComplete}
         />
@@ -62,7 +62,7 @@ class Splash extends Component {
     }
     return (
       <Slides>
-        <StatusBar barStyle='dark-content' />
+        <StatusBar barStyle='light-content' />
         {this.renderSlides()}
       </Slides>
     );
