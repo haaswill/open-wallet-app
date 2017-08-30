@@ -1,41 +1,43 @@
 import React, { Component } from 'react';
-import { Animated, View, Easing } from 'react-native';
+import { View, LayoutAnimation } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import styles from './styles';
 
+const CustomLayoutAnimation = {
+  duration: 200,
+  update: {
+    type: LayoutAnimation.Types.spring,
+    springDamping: 0.7,
+  },
+};
+
 class WalletsListItem extends Component {
   state = {
-    height: new Animated.Value(0),
-    opacity: new Animated.Value(0)
+    height: 0,
+    opacity: 0
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.expanded) {
+      this.updateState(200, 1);
+    } else {
+      this.updateState(0, 0);
+    }
   }
 
   onPress = (expanded, id, onPress) => {
     if (expanded) {
-      this.toggle(0, 0);
       onPress(null);
     } else {
-      this.toggle(200, 1);
       onPress(id);
     }
   }
 
-  toggle = (finalHeight, finalOpacity) => {
-    Animated.parallel([
-      Animated.timing(
-        this.state.opacity,
-        { toValue: finalOpacity, duration: 10000, useNativeDriver: true }
-      ),
-      Animated.timing(
-        this.state.height,
-        { toValue: finalHeight, duration: 10000 }
-      )
-    ]).start(this.updateState(finalHeight, finalOpacity));
-  }
-
   updateState = (finalHeight, finalOpacity) => {
+    LayoutAnimation.configureNext(CustomLayoutAnimation);
     this.setState({
-      height: new Animated.Value(finalHeight),
-      opacity: new Animated.Value(finalOpacity)
+      height: finalHeight,
+      opacity: finalOpacity
     });
   }
 
@@ -62,14 +64,14 @@ class WalletsListItem extends Component {
           title={title}
           titleStyle={styles.title}
         />
-        <Animated.View
+        <View
           style={{
             height: this.state.height,
             opacity: this.state.opacity
           }}
         >
           {children}
-        </Animated.View >
+        </View >
       </View>
     );
   }
