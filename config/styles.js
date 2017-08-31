@@ -2,7 +2,7 @@ import { Dimensions, Platform, StatusBar } from 'react-native';
 // Global Colors
 const colors = {
   primaryColor: '#3c3355',
-  secondaryColor: '#eeeeee',
+  secondaryColor: '#f8d979',
   errorColor: '#ff0000',
   successColor: '#7fff24',
   warningColor: '#ff9900',

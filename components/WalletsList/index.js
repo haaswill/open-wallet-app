@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { List, Icon } from 'react-native-elements';
 import { WalletsListItem } from '../WalletsListItem';
 import { formatCurrency } from '../../handlers';
@@ -30,15 +30,12 @@ class WalletsList extends Component {
         />
       }
       onPress={this.onPressRightIcon}
-      rightIcon={{
-        name: 'chevron-right',
-        type: 'material-community',
-        size: 60
-      }}
       subtitle={formatCurrency(wallet.value)}
       title={wallet.description}
     >
-      <Text>UHUUUL</Text>
+      <View>
+
+      </View>
     </WalletsListItem>
   ));
 

@@ -10,6 +10,7 @@ export default StyleSheet.create({
     flex: 1
   },
   itemContainer: {
+    borderBottomWidth: 0,
     paddingTop: 30,
     paddingBottom: 30
   },

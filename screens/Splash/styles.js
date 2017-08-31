@@ -10,13 +10,10 @@ export default StyleSheet.create({
     width: sizes.screenWidth
   },
   text: {
-    color: colors.white,
+    color: colors.secondaryColor,
     fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 15,
     textAlign: 'center'
-  },
-  button: {
-    backgroundColor: colors.white
   }
 });

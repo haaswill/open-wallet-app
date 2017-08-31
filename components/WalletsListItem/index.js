@@ -48,7 +48,6 @@ class WalletsListItem extends Component {
       id,
       leftIcon,
       onPress,
-      rightIcon,
       subtitle,
       title
     } = this.props;
@@ -58,7 +57,11 @@ class WalletsListItem extends Component {
           containerStyle={styles.itemContainer}
           leftIcon={leftIcon}
           onPress={() => this.onPress(expanded, id, onPress)}
-          rightIcon={rightIcon}
+          rightIcon={{
+            name: expanded ? 'chevron-down' : 'chevron-right',
+            type: 'material-community',
+            size: 60
+          }}
           subtitle={subtitle}
           subtitleStyle={styles.subtitle}
           title={title}

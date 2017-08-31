@@ -44,13 +44,15 @@ class Splash extends Component {
     if (index === slidesData.length - 1) {
       return (
         <Button
-          large
-          iconRight
-          title="Go To Login!"
-          icon={{ name: 'arrow-forward', color: colors.primaryColor }}
+          backgroundColor={colors.secondaryColor}
           color={colors.primaryColor}
-          buttonStyle={styles.button}
+          fontWeight='bold'
+          icon={{ name: 'arrow-forward', color: colors.primaryColor }}
+          iconRight
+          large
           onPress={this.onSlidesComplete}
+          raised
+          title="Go To Login!"
         />
       );
     }
