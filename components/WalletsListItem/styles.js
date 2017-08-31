@@ -9,6 +9,10 @@ export default StyleSheet.create({
   header: {
     flex: 1
   },
+  icon: {
+    marginLeft: 20,
+    marginRight: 20
+  },
   itemContainer: {
     borderBottomWidth: 0,
     paddingTop: 30,
@@ -19,6 +23,7 @@ export default StyleSheet.create({
     color: colors.inactiveColor
   },
   title: {
-    fontSize: 32
+    fontSize: 32,
+    color: colors.inactiveColor
   }
 });

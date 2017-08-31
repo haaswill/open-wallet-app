@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import { List, Icon } from 'react-native-elements';
+import { List } from 'react-native-elements';
 import { WalletsListItem } from '../WalletsListItem';
 import { formatCurrency } from '../../handlers';
 import { colors } from '../../config/styles';
@@ -15,29 +15,28 @@ class WalletsList extends Component {
     this.setState({ expandedWallet: id });
   }
 
-  renderWallets = wallets => wallets.map(wallet => (
-    <WalletsListItem
-      id={wallet._id}
-      expanded={this.state.expandedWallet === wallet._id}
-      key={wallet._id}
-      leftIcon={
-        <Icon
-          color={colors.inactiveColor}
-          iconStyle={styles.icon}
-          name={wallet.icon}
-          size={40}
-          type='material-community'
-        />
-      }
-      onPress={this.onPressRightIcon}
-      subtitle={formatCurrency(wallet.value)}
-      title={wallet.description}
-    >
-      <View>
-
-      </View>
-    </WalletsListItem>
-  ));
+  renderWallets = wallets => wallets.map(wallet => {
+    const expanded = this.state.expandedWallet === wallet._id;
+    return (
+      <WalletsListItem
+        color={expanded ? colors.secondaryColor : colors.inactiveColor}
+        expanded={expanded}
+        id={wallet._id}
+        leftIcon={wallet.icon}
+        key={wallet._id}
+        onPress={this.onPressRightIcon}
+        rightIcon={expanded ? 'chevron-down' : 'chevron-right'}
+        subtitle={formatCurrency(wallet.value)}
+        subtitleStyle={expanded && { color: colors.secondaryColor }}
+        title={wallet.description}
+        titleStyle={expanded && { color: colors.secondaryColor }}
+      >
+        <View style={styles.walletContainer}>
+          <Text>Last Transactions</Text>
+        </View>
+      </WalletsListItem>
+    );
+  });
 
   render() {
     const {

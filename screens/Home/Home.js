@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { Icon, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchAccountBalance } from '../../actions';
-import { MainScrollView, Spinner, Header, WalletsList } from '../../components';
+import { RefreshableMainScrollView, Spinner, Header, WalletsList } from '../../components';
 import { colors } from '../../config/styles';
 import styles from './styles';
 
 class Home extends Component {
   state = {
-    loading: true
+    loading: true,
+    refreshing: false
   };
 
   componentWillMount() {
@@ -17,7 +18,10 @@ class Home extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.wallets.length > 0 || this.props.wallets.length > 0) {
-      this.setState({ loading: false });
+      this.setState({
+        loading: false,
+        refreshing: false
+      });
     }
   }
 
@@ -54,18 +58,14 @@ class Home extends Component {
   }
 
   render() {
-    const {
-      wallets
-    } = this.props;
     return (
-      <MainScrollView header={this.renderHeader()}>
-        <Button
-          large
-          title="Update"
-          onPress={() => this.updateWallets()}
-        />
-        {this.renderWallets(wallets)}
-      </MainScrollView>
+      <RefreshableMainScrollView
+        header={this.renderHeader()}
+        onRefresh={() => this.updateWallets()}
+        refreshing={this.state.refreshing}
+      >
+        {this.renderWallets(this.props.wallets)}
+      </RefreshableMainScrollView>
     );
   }
 }

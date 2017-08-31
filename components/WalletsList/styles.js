@@ -6,8 +6,10 @@ export default StyleSheet.create({
     borderTopWidth: 0,
     marginTop: 0
   },
-  icon: {
-    marginLeft: 20,
-    marginRight: 20
+  transactionsTitle: {
+    fontSize: 26
+  },
+  walletContainer: {
+    flex: 1
   }
 });

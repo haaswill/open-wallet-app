@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, LayoutAnimation } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { ListItem, Icon } from 'react-native-elements';
+import { colors } from '../../config/styles';
 import styles from './styles';
 
 const CustomLayoutAnimation = {
@@ -44,28 +45,41 @@ class WalletsListItem extends Component {
   render() {
     const {
       children,
+      color,
       expanded,
       id,
       leftIcon,
       onPress,
+      rightIcon,
       subtitle,
-      title
+      subtitleStyle,
+      title,
+      titleStyle
     } = this.props;
     return (
       <View style={styles.container}>
         <ListItem
           containerStyle={styles.itemContainer}
-          leftIcon={leftIcon}
+          leftIcon={
+            <Icon
+              color={color}
+              iconStyle={styles.icon}
+              name={leftIcon}
+              size={40}
+              type='material-community'
+            />
+          }
           onPress={() => this.onPress(expanded, id, onPress)}
           rightIcon={{
-            name: expanded ? 'chevron-down' : 'chevron-right',
-            type: 'material-community',
-            size: 60
+            color,
+            name: rightIcon,
+            size: 60,
+            type: 'material-community'
           }}
           subtitle={subtitle}
-          subtitleStyle={styles.subtitle}
+          subtitleStyle={[styles.subtitle, subtitleStyle]}
           title={title}
-          titleStyle={styles.title}
+          titleStyle={[styles.title, titleStyle]}
         />
         <View
           style={{
