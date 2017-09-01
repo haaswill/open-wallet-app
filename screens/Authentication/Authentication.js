@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Text, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
-import { Button, Text } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import styles from './styles';
 import { facebookLoginAsync, googleLoginAsync } from '../../actions';
-import { MainView, Spinner, Header } from '../../components';
+import { MainView, Spinner } from '../../components';
 
 class Authentication extends Component {
   componentWillReceiveProps(nextProps) {
@@ -35,38 +35,30 @@ class Authentication extends Component {
       );
     }
     return (
-      <MainView
-        header={this.renderHeader()}
-        innerContainerStyle={container}
-      >
-        <Button
-          buttonStyle={facebookButton}
-          iconRight
-          icon={{ name: 'facebook', type: 'material-community' }}
-          large
-          onPress={this.onFacebookButtonPress}
-          raised
-          title='Access With Facebook'
-        />
-        <Text h1 style={text}>or</Text>
-        <Button
-          buttonStyle={googleButton}
-          iconRight
-          icon={{ name: 'google', type: 'material-community' }}
-          large
-          onPress={this.onGoogleButtonPress}
-          raised
-          title='Access With Google'
-        />
+      <MainView innerContainerStyle={container}>
+        <StatusBar barStyle='dark-content' />
+        <Text style={text}>You can use either your Facebook or your Google account to access.</Text>
+        <View>
+          <Button
+            buttonStyle={facebookButton}
+            iconRight
+            icon={{ name: 'facebook', type: 'material-community' }}
+            large
+            onPress={this.onFacebookButtonPress}
+            raised
+            title='Access With Facebook'
+          />
+          <Button
+            buttonStyle={googleButton}
+            iconRight
+            icon={{ name: 'google', type: 'material-community' }}
+            large
+            onPress={this.onGoogleButtonPress}
+            raised
+            title='Access With Google'
+          />
+        </View>
       </MainView>
-    );
-  }
-
-  renderHeader() {
-    return (
-      <Header
-        title='Authentication'
-      />
     );
   }
 

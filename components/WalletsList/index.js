@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { List } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { fetchTransactionsByWalletId } from '../../actions';
 import { WalletsListItem } from '../WalletsListItem';
+import { Spinner } from '../Spinner';
 import { formatCurrency } from '../../handlers';
 import { colors } from '../../config/styles';
 import styles from './styles';
@@ -13,6 +16,20 @@ class WalletsList extends Component {
 
   onPressRightIcon = id => {
     this.setState({ expandedWallet: id });
+  }
+
+  renderTransactionsByWalletId = id => {
+    this.props.fetchTransactionsByWalletId(id);
+    const { walletTransactions } = this.props;
+    if (walletTransactions.length > 0) {
+      return walletTransactions.map(transaction => (
+        <View style={styles.transactionContainer} key={transaction._id}>
+          <Text>{transaction.description}</Text>
+          <Text>{transaction.value}</Text>
+        </View>
+      ));
+    }
+    return <Spinner size='small' />;
   }
 
   renderWallets = wallets => wallets.map(wallet => {
@@ -33,6 +50,7 @@ class WalletsList extends Component {
       >
         <View style={styles.walletContainer}>
           <Text>Last Transactions</Text>
+          {this.renderTransactions(wallet._id)}
         </View>
       </WalletsListItem>
     );
@@ -50,4 +68,11 @@ class WalletsList extends Component {
   }
 }
 
-export { WalletsList };
+const mapStateToProps = ({ transaction }) => {
+  const { walletTransactions } = transaction;
+  return { walletTransactions };
+};
+
+const WalletsListContainer = connect(mapStateToProps, { fetchTransactionsByWalletId })(WalletsList);
+
+export { WalletsListContainer };

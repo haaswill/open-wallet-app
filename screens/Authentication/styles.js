@@ -9,14 +9,15 @@ export default StyleSheet.create({
     justifyContent: 'space-around'
   },
   facebookButton: {
-    backgroundColor: colors.facebookColor
+    backgroundColor: colors.facebookColor,
+    marginBottom: 10
   },
   googleButton: {
     backgroundColor: colors.googlePlusColor
   },
   text: {
     color: colors.primaryColor,
-    fontSize: 26,
+    fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center'
   }

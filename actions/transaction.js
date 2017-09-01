@@ -2,6 +2,7 @@ import { get } from '../handlers';
 import {
   FETCH_EXPENSES_SUCCESS,
   FETCH_INCOMES_SUCCESS,
+  FETCH_WALLET_TRANSACTIONS_SUCCESS,
   FETCH_TRANSFERS_SUCCESS,
   FETCH_TRANSACTIONS_FAIL
 } from './types';
@@ -26,10 +27,22 @@ export const fetchIncomes = () => async (dispatch, getState) => {
   }
 };
 
+export const fetchTransactionsByWalletId = (id) => async (dispatch, getState) => {
+  try {
+    const { data } =
+      await get(`transaction/wallet/${id}`,
+        { headers: getState().authentication.authorizationHeader });
+    dispatch({ type: FETCH_WALLET_TRANSACTIONS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: FETCH_TRANSACTIONS_FAIL });
+  }
+};
+
 export const fetchTransfers = () => async (dispatch, getState) => {
   try {
     const { data } =
-      await get('transaction/transfers', { headers: getState().authentication.authorizationHeader });
+      await get('transaction/transfers',
+        { headers: getState().authentication.authorizationHeader });
     dispatch({ type: FETCH_TRANSFERS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: FETCH_TRANSACTIONS_FAIL });

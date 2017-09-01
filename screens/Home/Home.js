@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import { Icon, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchAccountBalance } from '../../actions';
-import { RefreshableMainScrollView, Spinner, Header, WalletsList } from '../../components';
+import { RefreshableMainScrollView, Spinner, Header, WalletsListContainer } from '../../components';
 import { colors } from '../../config/styles';
 import styles from './styles';
 
@@ -50,10 +51,14 @@ class Home extends Component {
 
   renderWallets(wallets) {
     if (this.state.loading) {
-      return <Spinner size='large' />;
+      return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Spinner size='large' />
+        </View>
+      );
     }
     return (
-      <WalletsList wallets={wallets} />
+      <WalletsListContainer wallets={wallets} />
     );
   }
 

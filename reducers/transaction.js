@@ -2,6 +2,7 @@ import {
   FETCH_EXPENSES_SUCCESS,
   FETCH_INCOMES_SUCCESS,
   FETCH_TRANSFERS_SUCCESS,
+  FETCH_WALLET_TRANSACTIONS_SUCCESS,
   FETCH_TRANSACTIONS_FAIL
 } from '../actions/types';
 
@@ -9,7 +10,8 @@ const initialState = {
   errors: [],
   expenses: [],
   incomes: [],
-  transfers: [],
+  walletTransactions: [],
+  transfers: []
 };
 
 export default (state = initialState, action) => {
@@ -23,6 +25,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         incomes: action.payload
+      };
+    case FETCH_WALLET_TRANSACTIONS_SUCCESS:
+      return {
+        ...state,
+        walletTransactions: action.payload
       };
     case FETCH_TRANSFERS_SUCCESS:
       return {
