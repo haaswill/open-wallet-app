@@ -3,6 +3,7 @@ import {
   FETCH_EXPENSES_SUCCESS,
   FETCH_INCOMES_SUCCESS,
   FETCH_WALLET_TRANSACTIONS_SUCCESS,
+  FETCH_WALLET_TRANSACTIONS_START,
   FETCH_TRANSFERS_SUCCESS,
   FETCH_TRANSACTIONS_FAIL
 } from './types';
@@ -29,6 +30,7 @@ export const fetchIncomes = () => async (dispatch, getState) => {
 
 export const fetchTransactionsByWalletId = (id) => async (dispatch, getState) => {
   try {
+    dispatch({ type: FETCH_WALLET_TRANSACTIONS_START });
     const { data } =
       await get(`transaction/wallet/${id}`,
         { headers: getState().authentication.authorizationHeader });

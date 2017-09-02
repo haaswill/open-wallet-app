@@ -3,6 +3,7 @@ import {
   FETCH_INCOMES_SUCCESS,
   FETCH_TRANSFERS_SUCCESS,
   FETCH_WALLET_TRANSACTIONS_SUCCESS,
+  FETCH_WALLET_TRANSACTIONS_START,
   FETCH_TRANSACTIONS_FAIL
 } from '../actions/types';
 
@@ -16,6 +17,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_WALLET_TRANSACTIONS_START:
+      return {
+        ...state,
+        walletTransactions: null
+      };
     case FETCH_EXPENSES_SUCCESS:
       return {
         ...state,
