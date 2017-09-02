@@ -1,13 +1,20 @@
 import React from 'react';
 import { ScrollView, View, RefreshControl } from 'react-native';
 import PropTypes from 'prop-types';
+import { Spinner } from '../Spinner';
 import styles from './styles';
 
 const RefreshableMainScrollView = props => {
+  const renderSpinner = () => (
+    <View style={{ flex: 1, justifyContent: 'center' }}>
+      <Spinner size='large' />
+    </View>
+  );
   const {
-    header,
     children,
+    header,
     innerContainerStyle,
+    loading,
     onRefresh,
     refreshing
   } = props;
@@ -21,9 +28,9 @@ const RefreshableMainScrollView = props => {
             onRefresh={onRefresh}
           />
         }
-        style={[styles.body, innerContainerStyle]}
+        contentContainerStyle={[styles.body, innerContainerStyle]}
       >
-        {children}
+        {loading ? renderSpinner() : children}
       </ScrollView>
     </View >
   );

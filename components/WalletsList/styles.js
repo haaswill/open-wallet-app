@@ -7,7 +7,8 @@ export default StyleSheet.create({
     marginTop: 0
   },
   transactionsTitle: {
-    fontSize: 26
+    fontSize: 20,
+    textAlign: 'center'
   },
   walletContainer: {
     flex: 1

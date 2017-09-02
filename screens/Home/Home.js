@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import { Icon, Button } from 'react-native-elements';
+import { StatusBar } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchAccountBalance } from '../../actions';
-import { RefreshableMainScrollView, Spinner, Header, WalletsListContainer } from '../../components';
+import { RefreshableMainScrollView, Header, WalletsListContainer } from '../../components';
 import { colors } from '../../config/styles';
 import styles from './styles';
 
@@ -49,26 +49,21 @@ class Home extends Component {
     );
   }
 
-  renderWallets(wallets) {
-    if (this.state.loading) {
-      return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Spinner size='large' />
-        </View>
-      );
-    }
-    return (
-      <WalletsListContainer wallets={wallets} />
-    );
-  }
+  renderWallets = wallets => <WalletsListContainer wallets={wallets} />
 
   render() {
+    const {
+      loading,
+      refreshing
+    } = this.state;
     return (
       <RefreshableMainScrollView
         header={this.renderHeader()}
+        loading={loading}
         onRefresh={() => this.updateWallets()}
-        refreshing={this.state.refreshing}
+        refreshing={refreshing}
       >
+        <StatusBar barStyle='light-content' />
         {this.renderWallets(this.props.wallets)}
       </RefreshableMainScrollView>
     );

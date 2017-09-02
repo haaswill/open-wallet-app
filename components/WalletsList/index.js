@@ -11,17 +11,23 @@ import styles from './styles';
 
 class WalletsList extends Component {
   state = {
-    expandedWallet: null
+    expandedWallet: null,
+    loading: true
   }
 
-  onPressRightIcon = id => {
+  onPressWallet = id => {
+    console.log(id);
+    this.updateTransactions(id);
     this.setState({ expandedWallet: id });
   }
 
-  renderTransactionsByWalletId = id => {
+  updateTransactions = id => {
     this.props.fetchTransactionsByWalletId(id);
+  }
+
+  renderTransactionsByWalletId = () => {
     const { walletTransactions } = this.props;
-    if (walletTransactions.length > 0) {
+    if (!this.state.loading) {
       return walletTransactions.map(transaction => (
         <View style={styles.transactionContainer} key={transaction._id}>
           <Text>{transaction.description}</Text>
@@ -41,7 +47,7 @@ class WalletsList extends Component {
         id={wallet._id}
         leftIcon={wallet.icon}
         key={wallet._id}
-        onPress={this.onPressRightIcon}
+        onPress={this.onPressWallet}
         rightIcon={expanded ? 'chevron-down' : 'chevron-right'}
         subtitle={formatCurrency(wallet.value)}
         subtitleStyle={expanded && { color: colors.secondaryColor }}
@@ -49,20 +55,17 @@ class WalletsList extends Component {
         titleStyle={expanded && { color: colors.secondaryColor }}
       >
         <View style={styles.walletContainer}>
-          <Text>Last Transactions</Text>
-          {this.renderTransactions(wallet._id)}
+          <Text style={styles.transactionsTitle}>Last Transactions</Text>
+          {this.renderTransactionsByWalletId()}
         </View>
       </WalletsListItem>
     );
   });
 
   render() {
-    const {
-      wallets
-    } = this.props;
     return (
       <List containerStyle={styles.container}>
-        {this.renderWallets(wallets)}
+        {this.renderWallets(this.props.wallets)}
       </List>
     );
   }

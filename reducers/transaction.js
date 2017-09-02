@@ -10,7 +10,7 @@ const initialState = {
   errors: [],
   expenses: [],
   incomes: [],
-  walletTransactions: [],
+  walletTransactions: null,
   transfers: []
 };
 
