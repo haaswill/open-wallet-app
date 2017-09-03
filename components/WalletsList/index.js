@@ -29,43 +29,45 @@ class WalletsList extends Component {
     type='material-community'
   />;
 
+  renderTransactionNotFound = () => (
+    <View style={styles.transactionsNotFoundContainer}>
+      <Text style={styles.transactionsNotFound}>No transactions found...</Text>
+    </View>
+  );
+
+  renderTransaction = transaction => {
+    const color = transaction.type === 'Expense' ? colors.expenseColor : colors.incomeColor;
+    return (
+      <View
+        style={[styles.transactionsContainer,
+        { borderColor: color }]}
+        key={transaction._id}
+      >
+        <Text
+          style={[styles.transactionsDescription,
+          { color }]}
+        >
+          {transaction.description}
+        </Text>
+        <Text
+          style={[styles.transactionsDescription,
+          { color }]}
+        >
+          {formatCurrency(transaction.value)}
+        </Text>
+        {this.renderIcon(transaction.transactionCategory.icon, color)}
+      </View>
+    );
+  }
 
   renderTransactionsByWalletId = () => {
     const { walletTransactions } = this.props;
     if (walletTransactions === null) {
       return <Spinner size='small' />;
     } else if (walletTransactions.length === 0) {
-      return (
-        <View style={styles.transactionsNotFoundContainer}>
-          <Text style={styles.transactionsNotFound}>No transactions found...</Text>
-        </View>
-      );
+      return this.renderTransactionNotFound();
     }
-    console.log(walletTransactions[0]);
-    return walletTransactions.map(transaction => {
-      const color = transaction.type === 'Expense' ? colors.expenseColor : colors.incomeColor;
-      return (
-        <View
-          style={[styles.transactionsContainer,
-          { borderColor: color }]}
-          key={transaction._id}
-        >
-          <Text
-            style={[styles.transactionsDescription,
-            { color }]}
-          >
-            {transaction.description}
-          </Text>
-          <Text
-            style={[styles.transactionsDescription,
-            { color }]}
-          >
-            {formatCurrency(transaction.value)}
-          </Text>
-          {this.renderIcon(transaction.transactionCategory.icon, color)}
-        </View>
-      );
-    });
+    return walletTransactions.map(transaction => this.renderTransaction(transaction));
   }
 
   renderWallets = wallets => wallets.map(wallet => {
