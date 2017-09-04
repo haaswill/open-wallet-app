@@ -20,7 +20,10 @@ export default StyleSheet.create({
   transactionsDescription: {
     flex: 2,
     fontSize: 14,
-    fontWeight: '600'
+    fontWeight: '500'
+  },
+  transactionsIcon: {
+    flex: 1
   },
   transactionsNotFound: {
     color: colors.inactiveColor,
@@ -36,6 +39,12 @@ export default StyleSheet.create({
     fontSize: 20,
     marginBottom: 10,
     textAlign: 'center'
+  },
+  transactionsValue: {
+    flex: 2,
+    fontSize: 14,
+    fontWeight: '600',
+    textAlign: 'right'
   },
   walletContainer: {
     flex: 1

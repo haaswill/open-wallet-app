@@ -21,13 +21,25 @@ class WalletsList extends Component {
 
   updateTransactions = id => this.props.fetchTransactionsByWalletId(id);
 
-  renderIcon = (name, color) => <Icon
-    color={color}
-    containerStyle={{ flex: 1 }}
-    name={name}
-    size={20}
-    type='material-community'
-  />;
+  renderIcon = (name, color) => (
+    <Icon
+      color={color}
+      containerStyle={styles.transactionsIcon}
+      name={name}
+      size={20}
+      type='material-community'
+    />
+  );
+
+  renderEditIcon = (id, color) => (
+    <Icon
+      color={color}
+      containerStyle={styles.transactionsIcon}
+      name='pencil'
+      size={20}
+      type='material-community'
+    />
+  );
 
   renderTransactionNotFound = () => (
     <View style={styles.transactionsNotFoundContainer}>
@@ -35,27 +47,37 @@ class WalletsList extends Component {
     </View>
   );
 
+  renderTransactionDescription = (content, color) => (
+    <Text
+      style={[styles.transactionsDescription,
+      { color }]}
+    >
+      {content}
+    </Text>
+  );
+
+  renderTransactionValue = (content, color) => (
+    <Text
+      style={[styles.transactionsValue,
+      { color }]}
+    >
+      {formatCurrency(content)}
+    </Text>
+  );
+
   renderTransaction = transaction => {
     const color = transaction.type === 'Expense' ? colors.expenseColor : colors.incomeColor;
+    console.log(transaction);
     return (
       <View
+        key={transaction._id}
         style={[styles.transactionsContainer,
         { borderColor: color }]}
-        key={transaction._id}
       >
-        <Text
-          style={[styles.transactionsDescription,
-          { color }]}
-        >
-          {transaction.description}
-        </Text>
-        <Text
-          style={[styles.transactionsDescription,
-          { color }]}
-        >
-          {formatCurrency(transaction.value)}
-        </Text>
         {this.renderIcon(transaction.transactionCategory.icon, color)}
+        {this.renderTransactionDescription(transaction.description, color)}
+        {this.renderTransactionValue(transaction.value, color)}
+        {this.renderEditIcon(transaction._id, color)}
       </View>
     );
   }
@@ -77,8 +99,8 @@ class WalletsList extends Component {
         color={expanded ? colors.secondaryColor : colors.inactiveColor}
         expanded={expanded}
         id={wallet._id}
-        leftIcon={wallet.icon}
         key={wallet._id}
+        leftIcon={wallet.icon}
         onPress={this.onPressWallet}
         rightIcon={expanded ? 'chevron-down' : 'chevron-right'}
         subtitle={formatCurrency(wallet.value)}

@@ -5,33 +5,34 @@ import { Spinner } from '../Spinner';
 import styles from './styles';
 
 const RefreshableMainScrollView = props => {
-  const renderSpinner = () => (
-    <View style={{ flex: 1, justifyContent: 'center' }}>
-      <Spinner size='large' />
-    </View>
-  );
   const {
     children,
     header,
-    innerContainerStyle,
     loading,
     onRefresh,
     refreshing
   } = props;
+  const renderSpinner = () => (
+    <View style={styles.spinner}>
+      <Spinner size='large' />
+    </View>
+  );
+  const renderScrollView = () => (
+    <ScrollView
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+        />
+      }
+    >
+      {children}
+    </ScrollView>
+  );
   return (
     <View style={styles.container}>
       {header}
-      <ScrollView
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-          />
-        }
-        contentContainerStyle={[styles.body, innerContainerStyle]}
-      >
-        {loading ? renderSpinner() : children}
-      </ScrollView>
+      {loading ? renderSpinner() : renderScrollView()}
     </View >
   );
 };

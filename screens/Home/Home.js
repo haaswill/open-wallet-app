@@ -44,7 +44,7 @@ class Home extends Component {
       <Header
         elementLeft={renderIcon('chevron-left')}
         elementRight={renderIcon('chevron-right')}
-        title='August'
+        title='September'
       />
     );
   }
