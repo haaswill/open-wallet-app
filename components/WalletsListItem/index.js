@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, LayoutAnimation } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements';
-import { colors } from '../../config/styles';
 import styles from './styles';
 
 const CustomLayoutAnimation = {
@@ -20,7 +19,7 @@ class WalletsListItem extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.expanded) {
-      this.updateState(200, 1);
+      this.updateState(null, 1);
     } else {
       this.updateState(0, 0);
     }

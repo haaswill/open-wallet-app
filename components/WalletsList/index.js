@@ -92,7 +92,7 @@ class WalletsList extends Component {
     return walletTransactions.map(transaction => this.renderTransaction(transaction));
   }
 
-  renderWallets = wallets => wallets.map(wallet => {
+  renderWallets = (wallets) => wallets.map(wallet => {
     const expanded = this.state.expandedWallet === wallet._id;
     return (
       <WalletsListItem
@@ -117,9 +117,13 @@ class WalletsList extends Component {
   });
 
   render() {
+    const {
+      wallets,
+      walletTransactions
+    } = this.props;
     return (
       <List containerStyle={styles.container}>
-        {this.renderWallets(this.props.wallets)}
+        {this.renderWallets(wallets, walletTransactions)}
       </List>
     );
   }
