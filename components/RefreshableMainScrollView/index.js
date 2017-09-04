@@ -17,22 +17,20 @@ const RefreshableMainScrollView = props => {
       <Spinner size='large' />
     </View>
   );
-  const renderScrollView = () => (
-    <ScrollView
-      refreshControl={
-        <RefreshControl
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-        />
-      }
-    >
-      {children}
-    </ScrollView>
-  );
   return (
     <View style={styles.container}>
       {header}
-      {loading ? renderSpinner() : renderScrollView()}
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
+        contentContainerStyle={[styles.body, loading && { flex: 1 }]}
+      >
+        {loading ? renderSpinner() : children}
+      </ScrollView>
     </View >
   );
 };
