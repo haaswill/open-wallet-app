@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import { List, Icon } from 'react-native-elements';
+import { List, ListItem, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchTransactionsByWalletId } from '../../actions';
 import { WalletsListItem } from '../WalletsListItem';
 import { Spinner } from '../Spinner';
-import { formatCurrency } from '../../handlers';
+import { formatCurrency, formatDate } from '../../handlers';
 import { colors } from '../../config/styles';
 import styles from './styles';
 
@@ -26,7 +26,6 @@ class WalletsList extends Component {
       color={color}
       containerStyle={styles.transactionsIcon}
       name={name}
-      size={20}
       type='material-community'
     />
   );
@@ -35,8 +34,8 @@ class WalletsList extends Component {
     <Icon
       color={color}
       containerStyle={styles.transactionsIcon}
-      name='pencil'
-      size={20}
+      name='chevron-right'
+      onPress={() => console.log(id)}
       type='material-community'
     />
   );
@@ -69,16 +68,22 @@ class WalletsList extends Component {
     const color = transaction.type === 'Expense' ? colors.expenseColor : colors.incomeColor;
     console.log(transaction);
     return (
-      <View
+      <List
         key={transaction._id}
-        style={[styles.transactionsContainer,
-        { borderColor: color }]}
+        containerStyle={styles.container}
       >
-        {this.renderIcon(transaction.transactionCategory.icon, color)}
-        {this.renderTransactionDescription(transaction.description, color)}
-        {this.renderTransactionValue(transaction.value, color)}
-        {this.renderEditIcon(transaction._id, color)}
-      </View>
+        <ListItem
+          containerStyle={[styles.transactionsContainer, { borderColor: color, borderBottomColor: color }]}
+          leftIcon={this.renderIcon(transaction.transactionCategory.icon, color)}
+          rightIcon={this.renderEditIcon(transaction._id, color)}
+          rightTitle={formatDate(transaction.date)}
+          rightTitleStyle={{ color }}
+          subtitle={formatCurrency(transaction.value)}
+          subtitleStyle={[styles.transactionsValue, { color }]}
+          title={transaction.description}
+          titleStyle={[styles.transactionsDescription, { color }]}
+        />
+      </List>
     );
   }
 

@@ -8,27 +8,20 @@ export default StyleSheet.create({
     marginTop: 0
   },
   transactionsContainer: {
-    alignItems: 'flex-end',
     borderWidth: 1,
     borderRadius: 8,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
     marginBottom: 2,
-    marginHorizontal: 3,
-    padding: 5
+    marginHorizontal: 3
   },
   transactionsDescription: {
-    flex: 2,
-    fontSize: 14,
-    fontWeight: '500'
   },
   transactionsIcon: {
-    flex: 1
+    marginLeft: 10,
+    marginRight: 10,
   },
   transactionsNotFound: {
     color: colors.inactiveColor,
     fontSize: 18,
-    textAlign: 'center'
   },
   transactionsNotFoundContainer: {
     flex: 1,
@@ -41,10 +34,6 @@ export default StyleSheet.create({
     textAlign: 'center'
   },
   transactionsValue: {
-    flex: 2,
-    fontSize: 14,
-    fontWeight: '600',
-    textAlign: 'right'
   },
   walletContainer: {
     flex: 1
