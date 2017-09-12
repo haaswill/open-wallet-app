@@ -1,6 +1,12 @@
 {
   "extends": "rallycoding",
   "rules": {
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "no-eval": [
+      "error",
+      {
+        "allowIndirect": true
+      }
+    ]
   }
 }

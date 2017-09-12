@@ -50,3 +50,11 @@ export const fetchTransfers = () => async (dispatch, getState) => {
     dispatch({ type: FETCH_TRANSACTIONS_FAIL });
   }
 };
+
+export const postTransaction = () => async (dispatch, getState) => {
+  try {
+    console.log('post');
+  } catch (error) {
+    console.log(error);
+  }
+};

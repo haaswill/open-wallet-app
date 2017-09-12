@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { fetchAccountBalance } from '../../actions';
 import { RefreshableMainScrollView, Header, WalletsListContainer } from '../../components';
 import { colors } from '../../config/styles';
-import styles from './styles';
 
 class Home extends Component {
   state = {

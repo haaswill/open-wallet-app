@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
-import { MainView, Header } from '../../components';
+import { Button } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { postTransaction } from '../../actions';
+import { MainView, Header, Calculator } from '../../components';
+import { colors } from '../../config/styles';
 import styles from './styles';
 
 class AddTransaction extends Component {
+  state = {
+    type: false
+  }
+
   renderHeader() {
     return (
       <Header title='Add Transaction' />
@@ -11,14 +18,15 @@ class AddTransaction extends Component {
   }
 
   render() {
+    const color = this.state.type ? colors.incomeColor : colors.expenseColor;
     return (
       <MainView header={this.renderHeader()}>
-        <Text>AddTransaction Screen</Text>
-        <Text>AddTransaction Screen</Text>
-        <Text>AddTransaction Screen</Text>
+        <Calculator />
       </MainView>
     );
   }
 }
 
-export default AddTransaction;
+export default connect(null, {
+  postTransaction
+})(AddTransaction);
