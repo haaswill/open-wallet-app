@@ -32,7 +32,7 @@ const Calculator = ({ onButtonPressed, value }) => {
     <View style={styles.container}>
       <View style={styles.displayContainer}>
         <Text style={styles.displayText}>
-          {value || '0'}
+          {value}
         </Text>
       </View>
       <View style={styles.inputContainer}>

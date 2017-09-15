@@ -13,7 +13,7 @@ class AddTransaction extends Component {
   state = {
     isCalculatorVisible: true,
     type: false,
-    value: null
+    value: '0'
   }
 
   onCalculatorButtonPressed = input => {
@@ -50,7 +50,7 @@ class AddTransaction extends Component {
     if (value && value.length >= 14) {
       return;
     }
-    const newValue = value ? value + input : input;
+    const newValue = value !== '0' ? value + input : input;
     return this.setState({ value: newValue });
   }
 
