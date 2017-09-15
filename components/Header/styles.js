@@ -4,7 +4,6 @@ import { colors } from '../../config/styles';
 export default StyleSheet.create({
   container: {
     alignItems: 'flex-end',
-    backgroundColor: colors.primaryColor,
     flexDirection: 'row',
     height: 60,
     justifyContent: 'space-between',

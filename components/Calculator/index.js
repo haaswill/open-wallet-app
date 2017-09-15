@@ -13,12 +13,13 @@ const inputButtons = [
   ['Done']
 ];
 
-const Calculator = ({ onButtonPressed, value }) => {
+const Calculator = ({ mainColor, onButtonPressed, value }) => {
   const renderButtons = () => {
     const rows = inputButtons.map((row, rowIndex) => {
       const buttons = row.map((button, buttonIndex) =>
         <Button
           key={`${rowIndex}-${buttonIndex}`}
+          mainColor={mainColor}
           onPress={() => onButtonPressed(button)}
           value={button}
         />
@@ -30,7 +31,7 @@ const Calculator = ({ onButtonPressed, value }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.displayContainer}>
+      <View style={[styles.displayContainer, { backgroundColor: mainColor }]}>
         <Text style={styles.displayText}>
           {value}
         </Text>

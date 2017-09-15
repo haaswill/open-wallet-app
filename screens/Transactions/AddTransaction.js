@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
-import { Button } from 'react-native-elements';
+import { SegmentedControlIOS, TouchableHighlight, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import math from 'mathjs';
 import { postTransaction } from '../../actions';
 import { MainView, Header, Calculator } from '../../components';
 import { formatCurrency, formatDate } from '../../handlers';
-import { string } from '../../extenders';
 import { colors } from '../../config/styles';
 import styles from './styles';
+import '../../extenders';
 
 class AddTransaction extends Component {
   state = {
+    backgroundColor: colors.expenseColor,
     isCalculatorVisible: true,
-    type: false,
+    type: 0,
     value: '0'
+  }
+
+  onChangeType = event => {
+    const type = event.nativeEvent.selectedSegmentIndex;
+    const backgroundColor = type === 0 ? colors.expenseColor : colors.incomeColor;
+    this.setState({ backgroundColor, type });
   }
 
   onCalculatorButtonPressed = input => {
@@ -35,7 +42,7 @@ class AddTransaction extends Component {
     try {
       return math.eval(value).toString().truncate(14);
     } catch (error) {
-      return null;
+      return '0';
     }
   }
 
@@ -46,6 +53,21 @@ class AddTransaction extends Component {
     return formattedInput;
   }
 
+  handleBackspace = value => this.setState({ value: value.slice(0, -1) });
+
+  handleCalculatorDone = value => {
+    this.handleEquals(value);
+    this.toggleCalculator();
+  }
+
+  handleClearInput = () => this.setState({ value: '0' });
+
+  handleEquals = value => {
+    const formattedInput = this.formatDisplayValue(value);
+    const newValue = this.evaluate(formattedInput);
+    this.setState({ value: newValue });
+  }
+
   handleInput = (value, input) => {
     if (value && value.length >= 14) {
       return;
@@ -54,56 +76,61 @@ class AddTransaction extends Component {
     return this.setState({ value: newValue });
   }
 
-  handleBackspace = value => this.setState({ value: value.slice(0, -1) });
-
-  handleClearInput = () => this.setState({ value: null });
-
-  handleEquals = value => {
-    const formattedInput = this.formatDisplayValue(value);
-    const newValue = this.evaluate(formattedInput);
-    this.setState({ value: newValue });
-  }
-
-  handleCalculatorDone = value => {
-    this.handleEquals(value);
-    this.toggleCalculator();
-  }
-
   toggleCalculator = () => this.setState({ isCalculatorVisible: !this.state.isCalculatorVisible });
 
-  renderCalculator = () => {
+  renderCalculator = backgroundColor => (
+    <Calculator
+      mainColor={backgroundColor}
+      onButtonPressed={this.onCalculatorButtonPressed}
+      value={this.state.value}
+    />
+  );
+
+  renderHeader = backgroundColor => (
+    <Header
+      backgroundColor={backgroundColor}
+      title='Add Transaction'
+    />
+  );
+
+  renderForm = backgroundColor => {
     const {
-      isCalculatorVisible,
+      type,
       value
     } = this.state;
-    if (isCalculatorVisible) {
-      return (
-        <Calculator
-          onButtonPressed={this.onCalculatorButtonPressed}
-          value={value}
-        />
-      );
-    }
     return (
-      <Button
-        large
-        onPress={this.toggleCalculator}
-        title={`Total ${formatCurrency(value)}`}
-      />
-    );
-  }
-
-  renderHeader() {
-    return (
-      <Header title='Add Transaction' />
+      <View style={styles.container}>
+        <View style={[styles.header, { backgroundColor }]}>
+          <SegmentedControlIOS
+            onChange={(event) => this.onChangeType(event)}
+            selectedIndex={type}
+            style={{ margin: 10 }}
+            tintColor={colors.white}
+            values={['Expense', 'Income']}
+          />
+          <TouchableHighlight
+            onPress={this.toggleCalculator}
+            style={[styles.displayButtonContainer, { backgroundColor }]}
+          >
+            <Text style={styles.displayButtonText}>{formatCurrency(value)}</Text>
+          </TouchableHighlight>
+        </View>
+      </View>
     );
   }
 
   render() {
-    const color = this.state.type ? colors.incomeColor : colors.expenseColor;
+    const {
+      backgroundColor,
+      isCalculatorVisible
+    } = this.state;
     return (
-      <MainView header={this.renderHeader()}>
-        {this.renderCalculator()}
+      <MainView header={this.renderHeader(backgroundColor)}>
+        {
+          isCalculatorVisible ?
+            this.renderCalculator(backgroundColor) :
+            this.renderForm(backgroundColor)
+        }
       </MainView>
     );
   }
