@@ -7,31 +7,28 @@ export default StyleSheet.create({
   },
   displayContainer: {
     backgroundColor: colors.primaryColor,
-    flex: 2,
+    flex: 1,
     justifyContent: 'center'
   },
   displayText: {
     color: colors.white,
-    fontSize: 38,
+    fontSize: 25,
     fontWeight: 'bold',
     padding: 20,
     textAlign: 'right'
   },
-  inputButtonContainer: {
+  buttonContainer: {
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center'
   },
-  inputButtonContainerHighlighted: {
-    backgroundColor: colors.secondaryColor
-  },
-  inputButtonText: {
+  buttonText: {
     color: colors.primaryColor,
     fontSize: 22,
     fontWeight: 'bold'
   },
   inputContainer: {
-    flex: 8
+    flex: 9
   },
   inputRow: {
     flex: 1,
