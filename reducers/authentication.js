@@ -6,14 +6,13 @@ import {
 
 const initialState = {
   user: null,
-  authorizationHeader: {},
-  loading: false
+  authorizationHeader: {}
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_START:
-      return { ...state, loading: true, user: null };
+      return { ...state, user: null };
     case LOGIN_SUCCESS:
       return {
         ...state,
