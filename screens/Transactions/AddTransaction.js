@@ -115,6 +115,12 @@ class AddTransaction extends Component {
             <Text style={styles.displayButtonText}>{formatCurrency(value)}</Text>
           </TouchableHighlight>
         </View>
+        <View style={styles.body}>
+
+        </View>
+        <View style={styles.bottom}>
+
+        </View>
       </View>
     );
   }

@@ -7,3 +7,4 @@ export * from './Spinner';
 export * from './WalletsListItem';
 export * from './WalletsList';
 export * from './Calculator';
+export * from './Button';

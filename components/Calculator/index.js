@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import Button from './Button';
+import Button from '../Button';
 import styles from './styles';
 
 // input buttons to be displayed in the calculator
