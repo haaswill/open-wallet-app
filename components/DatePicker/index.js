@@ -48,7 +48,7 @@ class DatePicker extends Component {
               <Icon
                 color={colors.inactiveColor}
                 name='chevron-right'
-                size={15}
+                size={20}
                 type='material-community'
               />
             </View>

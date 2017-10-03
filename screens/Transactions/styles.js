@@ -29,6 +29,14 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'right'
   },
+  formItems: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 60,
+    paddingHorizontal: 10,
+    paddingVertical: 20
+  },
   header: {
     flex: 1
   },

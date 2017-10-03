@@ -153,6 +153,7 @@ class AddTransaction extends Component {
           </View>
           <View style={styles.row}>
             <DatePicker
+              containerStyle={styles.formItems}
               date={date}
               mainColor={backgroundColor}
               maximumDate={moment().add(100, 'years').toDate()}
@@ -164,6 +165,7 @@ class AddTransaction extends Component {
           </View>
           <View style={styles.row}>
             <TitleSwitch
+              containerStyle={styles.formItems}
               onChange={this.handlePaidChange}
               title='Paid'
               titleStyle={styles.title}

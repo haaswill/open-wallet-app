@@ -5,10 +5,7 @@ export default StyleSheet.create({
   container: {
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    height: 60,
-    paddingHorizontal: 10,
-    paddingVertical: 20
+    justifyContent: 'space-between'
   },
   title: {
     color: colors.black,
