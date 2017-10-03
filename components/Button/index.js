@@ -3,14 +3,21 @@ import { TouchableHighlight, Text } from 'react-native';
 import { colors } from '../../config/styles';
 import styles from './styles';
 
-const Button = ({ mainColor, onPress, value }) => (
-  <TouchableHighlight
-    onPress={onPress}
-    style={styles.buttonContainer}
-    underlayColor={colors.inactiveColor}
-  >
-    <Text style={[styles.buttonText, { color: mainColor }]}>{value}</Text>
-  </TouchableHighlight >
-);
+const Button = ({
+  containerStyle = {},
+  mainColor,
+  onPress,
+  title,
+  titleStyle = {},
+  underlayColor
+}) => (
+    <TouchableHighlight
+      onPress={onPress}
+      style={[styles.buttonContainer, containerStyle]}
+      underlayColor={underlayColor || colors.inactiveColor}
+    >
+      <Text style={[styles.buttonText, titleStyle, { color: mainColor }]}>{title}</Text>
+    </TouchableHighlight >
+  );
 
-export default Button;
+export { Button };

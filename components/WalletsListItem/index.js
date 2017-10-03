@@ -55,6 +55,10 @@ class WalletsListItem extends Component {
       title,
       titleStyle
     } = this.props;
+    const {
+      height,
+      opacity
+    } = this.state;
     return (
       <View style={styles.container}>
         <ListItem
@@ -80,14 +84,9 @@ class WalletsListItem extends Component {
           title={title}
           titleStyle={[styles.title, titleStyle]}
         />
-        <View
-          style={{
-            height: this.state.height,
-            opacity: this.state.opacity
-          }}
-        >
+        <View style={{ height, opacity }}>
           {children}
-        </View >
+        </View>
       </View>
     );
   }

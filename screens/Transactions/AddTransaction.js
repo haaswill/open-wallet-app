@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
-import { SegmentedControlIOS, TouchableHighlight, Text, View } from 'react-native';
+import {
+  SegmentedControlIOS,
+  Switch,
+  Text,
+  TextInput,
+  TouchableHighlight,
+  View
+} from 'react-native';
 import { connect } from 'react-redux';
 import math from 'mathjs';
+import moment from 'moment';
 import { postTransaction } from '../../actions';
-import { MainView, Header, Calculator } from '../../components';
-import { formatCurrency, formatDate } from '../../handlers';
+import { MainView, Header, Calculator, Button, DatePicker, TitleSwitch } from '../../components';
+import { formatCurrency } from '../../handlers';
 import { colors } from '../../config/styles';
 import styles from './styles';
 import '../../extenders';
@@ -12,9 +20,15 @@ import '../../extenders';
 class AddTransaction extends Component {
   state = {
     backgroundColor: colors.expenseColor,
+    category: 0,
+    date: new Date(),
+    description: null,
+    error: false,
     isCalculatorVisible: true,
+    paid: true,
+    transactionValue: '0',
     type: 0,
-    value: '0'
+    wallet: 0
   }
 
   onChangeType = event => {
@@ -24,57 +38,64 @@ class AddTransaction extends Component {
   }
 
   onCalculatorButtonPressed = input => {
-    const { value } = this.state;
+    const { transactionValue } = this.state;
     switch (input) {
       case '⌫':
-        return this.handleBackspace(value);
+        return this.handleBackspace(transactionValue);
       case 'c':
         return this.handleClearInput();
       case '=':
-        return this.handleEquals(value);
+        return this.handleEquals(transactionValue);
       case 'Done':
-        return this.handleCalculatorDone(value);
-      default: this.handleInput(value, input);
+        return this.handleCalculatorDone(transactionValue);
+      default: this.handleInput(transactionValue, input);
     }
   }
 
-  evaluate = value => {
+  evaluate = transactionValue => {
     try {
-      return math.eval(value).toString().truncate(14);
+      return math.eval(transactionValue).toString().truncate(14);
     } catch (error) {
       return '0';
     }
   }
 
-  formatDisplayValue = value => {
-    let formattedInput = value;
+  formatDisplayValue = transactionValue => {
+    let formattedInput = transactionValue;
     formattedInput = formattedInput.replaceAll('÷', '/');
     formattedInput = formattedInput.replaceAll('x', '*');
     return formattedInput;
   }
 
-  handleBackspace = value => this.setState({ value: value.slice(0, -1) });
+  handleBackspace = transactionValue =>
+    this.setState({ transactionValue: transactionValue.slice(0, -1) });
 
-  handleCalculatorDone = value => {
-    this.handleEquals(value);
+  handleCalculatorDone = transactionValue => {
+    this.handleEquals(transactionValue);
     this.toggleCalculator();
   }
 
-  handleClearInput = () => this.setState({ value: '0' });
+  handleClearInput = () => this.setState({ transactionValue: '0' });
 
-  handleEquals = value => {
-    const formattedInput = this.formatDisplayValue(value);
-    const newValue = this.evaluate(formattedInput);
-    this.setState({ value: newValue });
+  handleEquals = transactionValue => {
+    const formattedInput = this.formatDisplayValue(transactionValue);
+    const newTransactionValue = this.evaluate(formattedInput);
+    this.setState({ transactionValue: newTransactionValue });
   }
 
-  handleInput = (value, input) => {
-    if (value && value.length >= 14) {
+  handleInput = (transactionValue, input) => {
+    if (transactionValue && transactionValue.length >= 14) {
       return;
     }
-    const newValue = value !== '0' ? value + input : input;
-    return this.setState({ value: newValue });
+    const newTransactionValue = transactionValue !== '0' ? transactionValue + input : input;
+    return this.setState({ transactionValue: newTransactionValue });
   }
+
+  handleDateChange = value => this.setState({ date: value });
+
+  handlePaidChange = value => this.setState({ paid: value });
+
+  handleDescriptionChange = value => this.setState({ description: value });
 
   toggleCalculator = () => this.setState({ isCalculatorVisible: !this.state.isCalculatorVisible });
 
@@ -82,7 +103,7 @@ class AddTransaction extends Component {
     <Calculator
       mainColor={backgroundColor}
       onButtonPressed={this.onCalculatorButtonPressed}
-      value={this.state.value}
+      value={this.state.transactionValue}
     />
   );
 
@@ -95,8 +116,14 @@ class AddTransaction extends Component {
 
   renderForm = backgroundColor => {
     const {
+      category,
+      date,
+      description,
+      error,
+      paid,
+      transactionValue,
       type,
-      value
+      wallet
     } = this.state;
     return (
       <View style={styles.container}>
@@ -112,14 +139,44 @@ class AddTransaction extends Component {
             onPress={this.toggleCalculator}
             style={[styles.displayButtonContainer, { backgroundColor }]}
           >
-            <Text style={styles.displayButtonText}>{formatCurrency(value)}</Text>
+            <Text style={styles.displayButtonText}>{formatCurrency(transactionValue)}</Text>
           </TouchableHighlight>
         </View>
         <View style={styles.body}>
-
+          <View style={styles.row}>
+            <TextInput
+              onChangeText={this.handleDescriptionChange}
+              placeholder='Description'
+              style={styles.descriptionInput}
+              value={description}
+            />
+          </View>
+          <View style={styles.row}>
+            <DatePicker
+              date={date}
+              mainColor={backgroundColor}
+              maximumDate={moment().add(100, 'years').toDate()}
+              minimumDate={new Date(1900, 1, 1)}
+              onDateChange={this.handleDateChange}
+              title='Payment Date'
+              titleStyle={styles.title}
+            />
+          </View>
+          <View style={styles.row}>
+            <TitleSwitch
+              onChange={this.handlePaidChange}
+              title='Paid'
+              titleStyle={styles.title}
+              value={paid}
+            />
+          </View>
         </View>
         <View style={styles.bottom}>
-
+          <Button
+            mainColor={backgroundColor}
+            onPress={() => alert(transactionValue)}
+            title='Save!'
+          />
         </View>
       </View>
     );
@@ -127,7 +184,7 @@ class AddTransaction extends Component {
 
   render() {
     const {
-      backgroundColor,
+            backgroundColor,
       isCalculatorVisible
     } = this.state;
     return (

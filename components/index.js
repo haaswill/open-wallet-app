@@ -8,3 +8,5 @@ export * from './WalletsListItem';
 export * from './WalletsList';
 export * from './Calculator';
 export * from './Button';
+export * from './DatePicker';
+export * from './TitleSwitch';

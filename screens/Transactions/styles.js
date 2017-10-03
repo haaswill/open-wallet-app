@@ -2,12 +2,26 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../config/styles';
 
 export default StyleSheet.create({
+  body: {
+    flex: 3
+  },
+  bottom: {
+    flex: 1
+  },
   container: {
     flex: 1
   },
+  descriptionInput: {
+    color: colors.inactiveColor,
+    fontSize: 15,
+    fontWeight: 'bold',
+    height: 60,
+    paddingHorizontal: 10,
+    paddingVertical: 20
+  },
   displayButtonContainer: {
     justifyContent: 'center',
-    padding: 20
+    margin: 20
   },
   displayButtonText: {
     color: colors.white,
@@ -16,6 +30,15 @@ export default StyleSheet.create({
     textAlign: 'right'
   },
   header: {
-
+    flex: 1
+  },
+  row: {
+    borderColor: colors.inactiveColor,
+    borderBottomWidth: 1
+  },
+  title: {
+    color: colors.inactiveColor,
+    fontSize: 15,
+    fontWeight: 'bold'
   }
 });

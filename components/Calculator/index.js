@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import Button from '../Button';
+import { Button } from '../Button';
 import styles from './styles';
 
 // input buttons to be displayed in the calculator
@@ -21,7 +21,7 @@ const Calculator = ({ mainColor, onButtonPressed, value }) => {
           key={`${rowIndex}-${buttonIndex}`}
           mainColor={mainColor}
           onPress={() => onButtonPressed(button)}
-          value={button}
+          title={button}
         />
       );
       return <View style={styles.inputRow} key={`row-${rowIndex}`}>{buttons}</View>;

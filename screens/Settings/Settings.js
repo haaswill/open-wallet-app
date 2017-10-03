@@ -23,7 +23,7 @@ class Settings extends Component {
       <MainView header={this.renderHeader()}>
         <Button
           large
-          title="Log out!"
+          title='Log out!'
           onPress={this.logOut}
         />
       </MainView>

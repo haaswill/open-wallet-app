@@ -52,7 +52,7 @@ class Splash extends Component {
           large
           onPress={this.onSlidesComplete}
           raised
-          title="Go To Login!"
+          title='Go To Login!'
         />
       );
     }
