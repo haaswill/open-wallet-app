@@ -186,7 +186,7 @@ class AddTransaction extends Component {
 
   render() {
     const {
-            backgroundColor,
+      backgroundColor,
       isCalculatorVisible
     } = this.state;
     return (
