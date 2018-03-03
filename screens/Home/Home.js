@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StatusBar } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { fetchAccountBalance } from '../../actions';
 import { RefreshableMainScrollView, Header, WalletsListContainer } from '../../components';
 import { colors } from '../../config/styles';
@@ -43,7 +44,7 @@ class Home extends Component {
       <Header
         elementLeft={renderIcon('chevron-left')}
         elementRight={renderIcon('chevron-right')}
-        title='September'
+        title={moment().format('MMMM')}
       />
     );
   }
