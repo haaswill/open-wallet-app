@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { addNavigationHelpers, TabNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import { colors } from '../config/styles';
+import { addListener } from '../config/redux';
 
 // Screens
 import { Splash } from '../screens/Splash';
@@ -73,7 +74,9 @@ export const AppNavigator = TabNavigator(
 );
 
 const AppWithNavigationState = ({ dispatch, navigation }) => (
-  <AppNavigator navigation={addNavigationHelpers({ dispatch, state: navigation })} />
+  <AppNavigator
+    navigation={addNavigationHelpers({ dispatch, state: navigation, addListener })}
+  />
 );
 
 AppWithNavigationState.propTypes = {
