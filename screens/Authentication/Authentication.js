@@ -7,36 +7,27 @@ import { facebookLoginAsync, googleLoginAsync } from '../../actions';
 import { MainView, Spinner } from '../../components';
 
 class Authentication extends Component {
-  state = {
-    loading: false
-  }
-
   componentWillReceiveProps(nextProps) {
     this.onAuthenticationComplete(nextProps);
   }
 
   onFacebookButtonPress = () => {
     this.props.facebookLoginAsync();
-    this.setState({ loading: true });
   }
 
   onGoogleButtonPress = () => {
     this.props.googleLoginAsync();
-    this.setState({ loading: true });
   }
 
   onAuthenticationComplete(props) {
     if (props.user) {
-      this.setState({ loading: false });
       this.props.navigation.navigate('Home');
-    } else {
-      this.setState({ loading: false });
     }
   }
 
   renderButtons() {
     const { container, text, facebookButton, googleButton } = styles;
-    if (this.state.loading) {
+    if (this.props.loading) {
       return (
         <View style={container}>
           <Spinner size='large' />
@@ -80,4 +71,7 @@ class Authentication extends Component {
 
 const mapStateToProps = ({ authentication }) => authentication;
 
-export default connect(mapStateToProps, { facebookLoginAsync, googleLoginAsync })(Authentication);
+export default connect(mapStateToProps, {
+  facebookLoginAsync,
+  googleLoginAsync
+})(Authentication);

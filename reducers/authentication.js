@@ -6,13 +6,18 @@ import {
 
 const initialState = {
   user: null,
-  authorizationHeader: {}
+  authorizationHeader: {},
+  loading: false
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_START:
-      return { ...state, user: null };
+      return {
+        ...state,
+        user: null,
+        loading: true
+      };
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -21,7 +26,7 @@ export default (state = initialState, action) => {
         authorizationHeader: action.payload.authorizationHeader,
       };
     case LOGIN_FAIL:
-      return { ...state, ...initialState };
+      return initialState;
     default:
       return state;
   }

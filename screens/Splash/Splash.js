@@ -16,7 +16,7 @@ class Splash extends Component {
   state = { token: null }
 
   async componentWillMount() {
-    const token = await AsyncStorage.getItem('token');
+    const token = await AsyncStorage.getItem('tokenn');
     if (token) {
       this.props.navigation.navigate('Home');
     } else {
@@ -24,9 +24,7 @@ class Splash extends Component {
     }
   }
 
-  onSlidesComplete = () => {
-    this.props.navigation.navigate('Authentication');
-  }
+  onSlidesComplete = () => this.props.navigation.navigate('Authentication');
 
   renderSlides() {
     return slidesData.map((slide, index) => (
@@ -35,28 +33,22 @@ class Splash extends Component {
         style={styles.container}
       >
         <Text style={styles.text}>{slide.text}</Text>
-        {this.renderLastSlide(index)}
+        {index === slidesData.length - 1 && this.renderLastSlide()}
       </View>
     ));
   }
 
-  renderLastSlide(index) {
-    if (index === slidesData.length - 1) {
-      return (
-        <Button
-          backgroundColor={colors.secondaryColor}
-          color={colors.primaryColor}
-          fontWeight='bold'
-          icon={{ name: 'arrow-forward', color: colors.primaryColor }}
-          iconRight
-          large
-          onPress={this.onSlidesComplete}
-          raised
-          title='Go To Login!'
-        />
-      );
-    }
-  }
+  renderLastSlide = () => <Button
+    backgroundColor={colors.secondaryColor}
+    color={colors.primaryColor}
+    fontWeight='bold'
+    icon={{ name: 'arrow-forward', color: colors.primaryColor }}
+    iconRight
+    large
+    onPress={this.onSlidesComplete}
+    raised
+    title='Go To Login!'
+  />;
 
   render() {
     if (this.state.token === null) {

@@ -13,8 +13,7 @@ import { reduxNavigationMiddleware } from './config/redux';
 
 const persistConfig = {
   key: 'root',
-  storage,
-  whitelist: ['authentication']
+  storage
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -26,11 +25,7 @@ const store = createStore(
 
 const persistor = persistStore(store);
 
-// use .purge() to clean app state
-// persistStore(store, {
-//   storage: AsyncStorage,
-//   whitelist: ['authentication']
-// });
+persistor.purge();
 
 const App = () => (
   <Provider store={store}>
