@@ -11,7 +11,7 @@ export default StyleSheet.create({
   },
   text: {
     color: colors.secondaryColor,
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 15,
     textAlign: 'center'

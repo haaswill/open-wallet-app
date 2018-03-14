@@ -5,8 +5,9 @@ import styles from './styles';
 const Slides = ({ children }) => (
   <ScrollView
     horizontal
-    style={styles.container}
+    indicatorStyle='white'
     pagingEnabled
+    style={styles.container}
   >
     {children}
   </ScrollView>

@@ -7,9 +7,9 @@ import styles from './styles';
 import { Slides } from '../../components';
 
 const slidesData = [
-  { text: 'Welcome to Open Wallet' },
-  { text: 'A simple way to manage your finances' },
-  { text: 'And it\'s free!' }
+  { step: 'Step 1:', text: 'Welcome to Open Wallet' },
+  { step: 'Step 2:', text: 'A simple way to manage your finances' },
+  { step: 'Step 3:', text: 'And it\'s free!' }
 ];
 
 class Splash extends Component {
@@ -26,17 +26,15 @@ class Splash extends Component {
 
   onSlidesComplete = () => this.props.navigation.navigate('Authentication');
 
-  renderSlides() {
-    return slidesData.map((slide, index) => (
-      <View
-        key={slide.text}
-        style={styles.container}
-      >
-        <Text style={styles.text}>{slide.text}</Text>
-        {index === slidesData.length - 1 && this.renderLastSlide()}
-      </View>
-    ));
-  }
+  renderSlides = () => slidesData.map((slide, index) => (
+    <View
+      key={slide.text}
+      style={styles.container}
+    >
+      <Text style={styles.text}>{slide.text}</Text>
+      {index === slidesData.length - 1 && this.renderLastSlide()}
+    </View>
+  ));
 
   renderLastSlide = () => <Button
     backgroundColor={colors.secondaryColor}

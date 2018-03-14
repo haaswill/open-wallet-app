@@ -9,6 +9,9 @@
     "type": "git",
     "url": "git+https://github.com/haaswill/open-wallet-app.git"
   },
+  "scripts": {
+    "postinstall": "rndebugger-open --expo"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "expo": "^25.0.0",
@@ -28,6 +31,7 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "eslint-config-rallycoding": "^3.2.0"
+    "eslint-config-rallycoding": "^3.2.0",
+    "react-native-debugger-open": "^0.3.17"
   }
 }
